@@ -1,0 +1,9 @@
+name = BootSASS
+description = BootSASS theme for Bootstrap 3 based sites.
+core = 7.x
+base theme = basestrap
+engine = phptemplate
+
+stylesheets[screen, projection][] = css/bootsass.screen.css
+stylesheets[print][] = css/bootsass.print.css
+stylesheets-conditional[IE][screen, projection][] = css/bootsass.ie.css
