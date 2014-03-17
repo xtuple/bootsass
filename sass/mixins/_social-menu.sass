@@ -1,0 +1,22 @@
+=social-menu($height: 32, $margin-right: 5px)
+  $base: "../img"
+  $path: "#{$base}/social-menu/social-menu-sprite-#{$height}.png"
+  $list: mailto, facebook, google, linkedin, pinterest, rss, twitter, twitter-bird, instagram, tmblr, vimeo, youtube
+  .menu-social-menu
+    & > .content
+      & > ul.menu
+        & > li
+          float: left
+          margin-right: $margin-right
+          text-indent: -1000em
+          a
+            background: url("#{$path}") no-repeat 0 0
+            border: none
+            display: block
+            height: #{$height}px
+            width: #{$height}px
+          @for $i from 1 to length($list) + 1
+            $name: nth($list, $i)
+            &.#{$name}
+              a
+                background-position: 0 (-$height * ($i - 1)) + px
