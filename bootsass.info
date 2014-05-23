@@ -7,3 +7,20 @@ engine = phptemplate
 stylesheets[screen, projection][] = css/bootsass.screen.css
 stylesheets[print][] = css/bootsass.print.css
 stylesheets-conditional[IE][screen, projection][] = css/bootsass.ie.css
+
+; Compass module parameters
+compass[config][require][] = bootstrap-sass
+
+compass[config][css_dir] = css
+compass[config][sass_dir] = sass
+compass[config][images_dir] = img
+compass[config][javascripts_dir] = js
+compass[config][fonts_dir] = ../fonts
+
+compass[config][output_style] = expanded
+compass[config][relative_assets] = true
+compass[config][line_comments] = false
+compass[config][preferred_syntax] = sass
+
+compass[import][] = bootsass.screen.sass
+
