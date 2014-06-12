@@ -4,9 +4,7 @@ core = 7.x
 base theme = basestrap
 engine = phptemplate
 
-stylesheets[screen, projection][] = css/bootsass.screen.css
-stylesheets[print][] = css/bootsass.print.css
-stylesheets-conditional[IE][screen, projection][] = css/bootsass.ie.css
+stylesheets[all][] = css/bootsass.css
 
 ; Compass module parameters
 compass[config][require][] = bootstrap-sass
@@ -22,5 +20,5 @@ compass[config][relative_assets] = true
 compass[config][line_comments] = false
 compass[config][preferred_syntax] = sass
 
-compass[import][] = bootsass.screen.sass
+compass[import][] = bootsass.sass
 
