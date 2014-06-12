@@ -3,6 +3,9 @@ description = BootSASS theme for Bootstrap 3 based sites.
 core = 7.x
 engine = phptemplate
 
+bootstrap3[css] = false
+bootstrap3[js] = true
+
 stylesheets[all][] = css/bootsass.css
 
 ; Compass module parameters
