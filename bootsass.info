@@ -1,7 +1,6 @@
 name = BootSASS
 description = BootSASS theme for Bootstrap 3 based sites.
 core = 7.x
-base theme = basestrap
 engine = phptemplate
 
 stylesheets[all][] = css/bootsass.css
