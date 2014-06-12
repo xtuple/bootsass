@@ -1,0 +1,53 @@
+@import "../params/bootsass"
+@import "../params/bootstrap"
+
+.ajax-progress
+  display: block
+  float: right
+  margin-right: 2px
+  margin-top: -30px
+  .throbber
+    background-position: -3px -164px
+  .message
+    display: none
+
+select.ajax-processed
+  & + .ajax-progress
+    margin-right: 33px
+
+button.ajax-processed
+  & + .ajax-progress
+    display: none
+    margin: 0
+
+fieldset
+  margin-bottom: 2em
+
+table.views-table
+  @extend .table
+  @extend .table-striped
+
+.node-unpublished
+  margin: 0 -15px
+  padding: 10px 15px
+
+#fancybox-wrap
+  -moz-box-sizing: content-box
+  div
+    -moz-box-sizing: content-box
+
+// @see xdruple_fields.module
+.container-date-popup
+  & > .form-item
+    margin-bottom: 0
+    .form-item
+      margin-top: 0
+
+.container-inline-date
+  label
+    display: block
+  .date-padding
+    padding: 0
+
+.vertical-tabs .form-type-textfield input
+  width: auto
