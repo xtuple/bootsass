@@ -20,5 +20,5 @@ compass[config][relative_assets] = true
 compass[config][line_comments] = false
 compass[config][preferred_syntax] = sass
 
-compass[import][] = bootsass.sass
-
+compass[process][] = bootsass.sass
+compass[params][] = bootsass/_params.sass
