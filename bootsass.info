@@ -9,8 +9,6 @@ bootstrap3[js] = true
 stylesheets[all][] = css/bootsass.css
 
 ; Compass module parameters
-compass[config][require][] = bootstrap-sass
-
 compass[config][css_dir] = css
 compass[config][sass_dir] = sass
 compass[config][images_dir] = img
