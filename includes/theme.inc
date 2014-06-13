@@ -3,7 +3,7 @@
 /**
  * Preprocess function for layout-header.tpl.php
  */
-function bootcommerce_preprocess_layout_header(&$variables) {
+function bootsass_preprocess_layout_header(&$variables) {
   $variables['site_phone'] = theme('block_block', array(
     'name'    => 'site-phone',
     'title'   => variable_get('header_site_phone_title'),
@@ -39,21 +39,21 @@ function bootcommerce_preprocess_layout_header(&$variables) {
 /**
  * Preprocess function for layout-body-top.tpl.php
  */
-function bootcommerce_preprocess_layout_body_top(&$variables) {
+function bootsass_preprocess_layout_body_top(&$variables) {
   $variables['messages'] = theme('status_messages');
 }
 
 /**
  * Preprocess function for layout-body-middle.tpl.php
  */
-function bootcommerce_preprocess_layout_body_middle(&$variables) {
+function bootsass_preprocess_layout_body_middle(&$variables) {
   if (!empty($variables['content_middle']['#theme_wrappers'])) {
     if (FALSE !== ($key = array_search('region', $variables['content_middle']['#theme_wrappers']))) {
       unset($variables['content_middle']['#theme_wrappers'][$key]);
     }
   }
 
-  $variables['show_content_context'] = _bootcommerce_show_content_context();
+  $variables['show_content_context'] = _bootsass_show_content_context();
   if ($variables['show_content_context'] == FALSE) {
     $col_lg = 'col-lg-12';
   }
@@ -67,14 +67,14 @@ function bootcommerce_preprocess_layout_body_middle(&$variables) {
 /**
  * Preprocess function for layout-body-bottom.tpl.php
  */
-function bootcommerce_preprocess_layout_body_bottom(&$variables) {
+function bootsass_preprocess_layout_body_bottom(&$variables) {
 
 }
 
 /**
  * Preprocess function for layout-footer.tpl.php
  */
-function bootcommerce_preprocess_layout_footer(&$variables) {
+function bootsass_preprocess_layout_footer(&$variables) {
   $variables['main_menu'] = theme('block_menu', array(
     'name'  => 'menu_main_menu',
     'title' => variable_get('footer_main_menu_title', 'Main menu'),
@@ -119,7 +119,7 @@ function bootcommerce_preprocess_layout_footer(&$variables) {
 /**
  * Preprocess function for layout-content-top.tpl.php
  */
-function bootcommerce_preprocess_layout_content_top(&$variables) {
+function bootsass_preprocess_layout_content_top(&$variables) {
   $variables['tabs'] = theme('menu_local_tasks', array(
     'primary'   => menu_primary_local_tasks(),
     'secondary' => menu_secondary_local_tasks(),
@@ -132,14 +132,14 @@ function bootcommerce_preprocess_layout_content_top(&$variables) {
 /**
  * Preprocess function for layout-content-bottom.tpl.php
  */
-function bootcommerce_preprocess_layout_content_bottom(&$variables) {
+function bootsass_preprocess_layout_content_bottom(&$variables) {
 
 }
 
 /**
  * Preprocess function for layout-content-context.tpl.php
  */
-function bootcommerce_preprocess_layout_content_context(&$variables) {
+function bootsass_preprocess_layout_content_context(&$variables) {
   $blocks = array();
 
   $panel    = new \CDD\Bootstrap\Drupal\Panel('categories-tree', xdruple_queries_categories_tree_block(), t('Categories'));
@@ -155,18 +155,18 @@ function bootcommerce_preprocess_layout_content_context(&$variables) {
   $variables['blocks'] = $blocks;
 }
 
-function bootcommerce_process_layout_content_context(&$variables) {
+function bootsass_process_layout_content_context(&$variables) {
   if (!empty($variables['blocks']['categories_tree'])) {
     $variables['categories_tree'] = $variables['blocks']['categories_tree'];
     unset($variables['blocks']['categories_tree']);
   }
 }
 
-function _bootcommerce_show_content_context() {
-  return !drupal_match_menu_path(menu_get_original_path(), _bootcommerce_page_without_content_context());
+function _bootsass_show_content_context() {
+  return !drupal_match_menu_path(menu_get_original_path(), _bootsass_page_without_content_context());
 }
 
-function _bootcommerce_page_without_content_context() {
+function _bootsass_page_without_content_context() {
   return array(
     'cart',
     'checkout',
