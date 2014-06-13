@@ -1,0 +1,124 @@
+@import "compass"
+@import "mixins/clearfix"
+@import "mixins/font-family"
+
+.view-ft-commerce-xd-products
+  @extend .row
+  .views-columns
+    +clearfix
+    margin-bottom: 30px
+  .views-row
+    @extend .col-lg-4
+  .views-field-xt-url-image-field
+    .field-content
+      @extend .thumbnail
+      height: 135px
+      margin-bottom: 5px
+  .views-field-title
+    font-weight: bold
+  .views-field-subTitle
+    text-transform: lowercase
+  .views-field-commerce-price
+    @extend h4
+  .views-field-add-to-cart-form
+    float: right
+  .views-field-nothing
+    float: right
+    margin-left: 5px
+    a
+      @extend .btn
+      @extend .btn-info
+
+.view-ft-commerce-product
+  .views-field-xt-url-image-field
+    float: left
+    margin-right: 10px
+    img
+      @extend .thumbnail
+  .views-field-commerce-price
+    @extend h2
+    margin-bottom: 20px
+    .field-content
+      @extend .label
+      @extend .label-success
+  .views-field-add-to-cart-form
+    margin-top: 20px
+    .form-item-quantity
+      +inline-block()
+    button
+      margin-top: 25px
+  .views-field-sku,
+  .views-field-productCategory
+    font-size: $font-size-large
+  .views-field-extDescrip
+    margin-top: 20px
+
+.view-xd-user-saved-carts-block
+  .views-content
+    @extend .list-group
+  .views-row
+    @extend .list-group-item
+  .views-label
+    font-weight: $fw-bold
+  .views-field-commerce-order-total
+    font-size: 18px
+    margin: 10px 0
+    text-align: right
+  .views-field-move-order
+    margin-top: 10px
+    text-align: right
+    .field-content
+      a
+        @extend .btn
+        @extend .btn-primary
+
+.view-xd-user-saved-carts
+  .views-table > tbody > tr > td.views-field
+    vertical-align: middle
+  .views-field-commerce-order-total
+    font-weight: $fw-bold
+  .views-field-move-order
+    a
+      @extend .btn
+      @extend .btn-primary
+
+.view-commerce-line-item-table
+  .views-table
+    margin-bottom: 0
+.field-name-commerce-order-total
+  .commerce-price-formatted-components
+    width: auto
+    tr.component-type-commerce-price-formatted-amount
+      background-color: $table-bg-active
+      font-size: 18px
+      .component-title
+        font-weight: $fw-normal
+        margin-left: 10px
+        text-align: right
+
+.field-type-commerce-customer-profile-reference
+  @extend fieldset
+  & > .field-label
+    @extend legend
+  & > .field-items
+    @extend .row
+  .field-type-entityreference
+    @extend .col-lg-4
+
+.entity-xtuple-xdruplecommerceshipto
+  & > .content
+    @extend .row
+    & > .field
+      @extend .col-lg-12
+      margin-bottom: 10px
+      &.field-type-xdruple-entityreference
+        @extend .col-lg-6
+
+.checkout-completion-message
+  @extend .well
+  p:last-child
+    margin-bottom: 0
+
+.entity-xtuple-xdruplecommercecontact
+  .field-name-erp-xdruplecommercecontactaddress
+    margin-top: 20px

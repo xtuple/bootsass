@@ -1,0 +1,126 @@
+@import "compass"
+
+form
+  div.messages
+    @extend .alert
+  div.messages.error
+    @extend .alert-danger
+
+#views-form-ft-commerce-cart-form-default,
+.view-ft-commerce-cart-summary
+  .views-table
+    @extend table
+    @extend .table
+    tbody
+      & > tr
+        & > td
+          font-size: $font-size-large
+          vertical-align: middle
+  .line-item-summary
+    font-size: $font-size-large
+    padding: $table-cell-padding
+  .views-field-commerce-total
+    text-align: right
+  .form-actions
+    padding: $table-cell-padding
+    .form-submit
+      margin-left: 5px
+
+#commerce-checkout-form-checkout
+  legend
+    margin-bottom: 5px
+  fieldset
+    margin-bottom: 20px
+  .button-operator
+    display: none
+  #edit-buttons
+    .form-submit
+      float: right
+      margin-left: 5px
+  #edit-cancel
+    @extend .btn-danger
+    border-style: solid
+    border-width: 1px
+    padding: $padding-base-vertical $padding-base-horizontal
+  .commerce-order-handler-area-order-total
+    font-size: $font-size-large
+  .redirect-list
+    display: none
+  .customer_profile_shipping,
+  .customer_profile_billing
+    & > div.fieldset-wrapper
+      @extend .row
+      .field-name-xd-ship-to,
+      .field-name-xd-customer
+        @extend .col-lg-12
+      & > fieldset.form-wrapper
+        @extend .col-lg-6
+      & > div.field-type-entityreference
+        fieldset.form-wrapper
+          @extend .col-lg-6
+
+#commerce-checkout-form-shipping,
+#commerce-checkout-form-review
+  legend
+    margin-bottom: 5px
+  fieldset
+    margin-bottom: 20px
+  .button-operator
+    display: none
+  #edit-buttons
+    .form-submit
+      float: right
+      margin-left: 5px
+  #edit-back
+    @extend .btn-danger
+    border-style: solid
+    border-width: 1px
+    padding: $padding-base-vertical $padding-base-horizontal
+
+#commerce-checkout-form-review
+  .checkout-help
+    @extend .well
+    @extend .well-sm
+    margin-bottom: 20px
+  .checkout-review-pane
+    margin-bottom: 20px
+  .checkout-review-fieldset--account
+    .form-item
+      margin: 0
+  .checkout-review-pane--customer-profile-shipping,
+  .checkout-review-pane--customer-profile-billing
+    $vertical-margin: 5px
+    .fieldset-wrapper
+      @extend .row
+    .field-name-xd-ship-to,
+    .field-name-xd-ship-to-contact,
+    .field-name-xd-ship-to-address,
+    .field-name-xd-bill-to-contact,
+    .field-name-xd-bill-to-address,
+    .field-name-xd-customer
+      @extend .col-lg-4
+    .entity-xtuple-xdruplecommerceaddress
+      @extend address
+      font-style: italic
+      margin-top: $vertical-margin
+    .field-type-entityreference
+      & > .field-label
+        margin: $vertical-margin 0
+
+#payment-details
+  @extend .row
+  .form-item-commerce-payment-payment-details-credit-card-owner,
+  .form-item-commerce-payment-payment-details-credit-card-number,
+  .form-type-select.form-item-commerce-payment-payment-details-credit-card-type
+    @extend .col-lg-4
+  .form-item-commerce-payment-payment-details-credit-card-code
+    @extend .col-lg-2
+  .commerce-credit-card-expiration
+    @extend .col-lg-2
+    margin-top: 1em
+    margin-bottom: 1.5em
+    label
+      display: block
+    .form-select
+      +inline-block()
+      width: auto

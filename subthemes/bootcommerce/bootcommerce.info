@@ -1,0 +1,14 @@
+name = BootCommerce
+description = Default theme for xTuple Commerce website
+core = 7.x
+engine = phptemplate
+base theme = bootsass
+
+stylesheets[all][] = css/bootcommerce.screen.css
+stylesheets[print][] = css/bootcommerce.print.css
+stylesheets-conditional[IE][all][] = css/bootcommerce.ie.css
+
+scripts[] = js/ft/ft_commerce.js
+
+compass[process][] = bootcommerce.screen.sass
+compass[params][] = bootcommerce/_params.sass

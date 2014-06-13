@@ -1,0 +1,14 @@
+@import "mixins/clearfix"
+
+.view-id-ct_blog_page
+  .views-row
+    +clearfix
+    margin-bottom: 30px
+  .views-field-title-field
+    h2
+      margin-top: 0
+  .views-field-view-node
+    float: right
+    a
+      @extend .btn
+      @extend .btn-info

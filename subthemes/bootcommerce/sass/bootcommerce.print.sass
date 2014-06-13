@@ -1,0 +1,18 @@
+#skip-link,
+#header-wrap,
+#body-top-wrap,
+#body-bottom-wrap,
+#context-wrap,
+#content-top-wrap,
+#content-bottom-wrap,
+#pseudo-footer,
+#footer-wrap,
+.pane-page-tabs,
+body.page-user-pending-order .pane-panel-content-header-default,
+body.page-user-invoice .pane-panel-content-header-default
+  @extend .hidden-print
+
+body.page-user-pending-order .xdruple-print,
+body.page-user-invoice .xdruple-print
+  a[href]:after
+    content: ""
