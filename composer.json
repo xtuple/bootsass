@@ -1,0 +1,13 @@
+{
+  "name": "themes/xtuple/bootsass",
+  "description": "Base theme for xTuple website",
+  "type": "library",
+  "license": "GPL-2.0",
+  "authors": [
+    {
+      "name": "Andrey Mikheychik",
+      "email": "a.mikheychik@gmail.com",
+      "role": "Developer"
+    }
+  ]
+}
