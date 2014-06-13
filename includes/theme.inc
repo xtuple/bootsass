@@ -17,21 +17,9 @@ function bootsass_preprocess_layout_header(&$variables) {
     'context' => 'header',
   ));
 
-  $variables['search_box'] = theme('block_form', array(
-    'name' => 'xdruple_search_search_form',
-  ));
-
   $variables['user_menu'] = theme('block_menu', array(
     'name'    => 'user-menu',
     'context' => 'header',
-  ));
-
-  $variables['cart_dropdown'] = theme('block_cart_dropdown', array(
-    'name' => 'cart-dropdown',
-  ));
-
-  $variables['order_defaults_form'] = theme('block_order_defaults_form', array(
-    'name' => 'order-defaults_form',
   ));
 }
 
@@ -40,7 +28,10 @@ function bootsass_preprocess_layout_header(&$variables) {
  * Preprocess function for layout-body-top.tpl.php
  */
 function bootsass_preprocess_layout_body_top(&$variables) {
-  $variables['messages'] = theme('status_messages');
+  $variables['messages']   = theme('status_messages');
+  $variables['breadcrumb'] = theme('breadcrumb', array(
+    'breadcrumb' => drupal_get_breadcrumb(),
+  ));
 }
 
 /**
@@ -142,24 +133,7 @@ function bootsass_preprocess_layout_content_bottom(&$variables) {
 function bootsass_preprocess_layout_content_context(&$variables) {
   $blocks = array();
 
-  $panel    = new \CDD\Bootstrap\Drupal\Panel('categories-tree', xdruple_queries_categories_tree_block(), t('Categories'));
-  $blocks[] = $panel->theme();
-
-  /** @var stdClass $user */
-  global $user;
-  if ($user->uid == 0) {
-    $panel    = new \Xtuple\Xcommerce\Panels\FormPanel('user_login_block', 'Login');
-    $blocks[] = $panel->theme();
-  }
-
   $variables['blocks'] = $blocks;
-}
-
-function bootsass_process_layout_content_context(&$variables) {
-  if (!empty($variables['blocks']['categories_tree'])) {
-    $variables['categories_tree'] = $variables['blocks']['categories_tree'];
-    unset($variables['blocks']['categories_tree']);
-  }
 }
 
 function _bootsass_show_content_context() {

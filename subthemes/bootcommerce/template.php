@@ -4,84 +4,42 @@
  * @file keeps theme functions overrides
  */
 
-//function bootcommerce_theme() {
-//  $items = array();
-//
-//  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('header');
-//  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('body_top');
-//  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('body_middle');
-//  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('body_bottom');
-//  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('content_top');
-//  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('content_bottom');
-//  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('content_context');
-//  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('footer');
-//
-//  return $items;
-//}
+function bootcommerce_preprocess_layout_header(&$variables) {
+  $variables['search_box'] = theme('block_form', array(
+    'name' => 'xdruple_search_search_form',
+  ));
 
-///**
-// * Preprocess function for page.tpl.php
-// */
-//function bootcommerce_preprocess_page(&$variables) {
-//  $variables['header']   = theme('layout_header');
-//  $variables['body_top'] = theme('layout_body_top');
-//
-//  $variables['body_middle'] = theme('layout_body_middle', array(
-//    'content_middle' => $variables['page']['content'],
-//    'content_top'    => theme('layout_content_top'),
-//    'content_bottom' => theme('layout_content_bottom'),
-//    'context'        => theme('layout_content_context'),
-//  ));
-//  $variables['body_bottom'] = theme('layout_body_bottom');
-//  $variables['footer']      = theme('layout_footer');
-//}
+  $variables['cart_dropdown'] = theme('block_cart_dropdown', array(
+    'name' => 'cart-dropdown',
+  ));
 
-//function bootcommerce_preprocess_block_menu(&$variables) {
-//  if ($variables['name'] == 'menu_main_menu') {
-//    if (!empty($variables['context']) && $variables['context'] == 'header') {
-//      $variables['attributes_array']['class'][] = 'pull-right';
-//
-//      $variables['content_attributes_array']['class'][] = 'navbar';
-//      $variables['content_attributes_array']['class'][] = 'navbar-default';
-//      $variables['content_attributes_array']['class'][] = 'pull-right';
-//
-//      $variables['hide_empty_title'] = TRUE;
-//
-//      $variables['content'] = '<div class="container-fluid">' . $variables['content'] . '</div>';
-//    }
-//  }
-//}
-//
-//function bootcommerce_preprocess_links(&$variables) {
-//  if (!empty($variables['menu'])) {
-//    if ($variables['menu'] == 'menu_main_menu') {
-//      if (!empty($variables['context']) && $variables['context'] == 'header') {
-//        $variables['attributes']['class'][] = 'nav';
-//        $variables['attributes']['class'][] = 'navbar-nav';
-//        $variables['attributes']['class'][] = 'navbar-right';
-//      }
-//    }
-//    if ($variables['menu'] == 'user-menu') {
-//      if (!empty($variables['context']) && $variables['context'] == 'header') {
-//        $variables['attributes']['class'][] = 'pull-right';
-//      }
-//    }
-//    if ($variables['menu'] == 'menu-social-menu') {
-//      foreach ($variables['links'] as &$link) {
-//        if ($host = parse_url($link['href'], PHP_URL_HOST)) {
-//          $parts = array_reverse(explode('.', $host));
-//          $class = strtolower($parts[1]);
-//        }
-//        elseif (strpos($link['href'], 'mailto:') === 0) {
-//          $class = 'mailto';
-//        }
-//        else {
-//          $temp  = explode('/', $link['href']);
-//          $temp  = explode('.', array_pop($temp));
-//          $class = drupal_clean_css_identifier(array_shift($temp));
-//        }
-//        $link['attributes']['class'][] = $class;
-//      }
-//    }
-//  }
-//}
+  $variables['order_defaults_form'] = theme('block_order_defaults_form', array(
+    'name' => 'order-defaults_form',
+  ));
+}
+
+/**
+ * Preprocess function for layout-content-context.tpl.php
+ */
+function bootcommerce_preprocess_layout_content_context(&$variables) {
+  $blocks = array();
+
+  $panel    = new \CDD\Bootstrap\Drupal\Panel('categories-tree', xdruple_queries_categories_tree_block(), t('Categories'));
+  $blocks[] = $panel->theme();
+
+  /** @var stdClass $user */
+  global $user;
+  if ($user->uid == 0) {
+    $panel    = new \Xtuple\Xcommerce\Panels\FormPanel('user_login_block', 'Login');
+    $blocks[] = $panel->theme();
+  }
+
+  $variables['blocks'] = $blocks;
+}
+
+function bootcommerce_process_layout_content_context(&$variables) {
+  if (!empty($variables['blocks']['categories_tree'])) {
+    $variables['categories_tree'] = $variables['blocks']['categories_tree'];
+    unset($variables['blocks']['categories_tree']);
+  }
+}
