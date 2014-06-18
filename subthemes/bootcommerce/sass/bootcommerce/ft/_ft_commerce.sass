@@ -4,7 +4,7 @@
 
 .view-ft-commerce-xd-products
   .views-columns
-    +clearfix
+    @extend .row
     margin-bottom: 30px
   .views-row
     @extend .col-lg-4
@@ -14,7 +14,7 @@
       height: 135px
       margin-bottom: 5px
   .views-field-title
-    font-weight: bold
+    font-weight: $fw-bold
   .views-field-subTitle
     text-transform: lowercase
   .views-field-commerce-price

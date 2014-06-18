@@ -39,11 +39,11 @@ function bootsass_preprocess_page(&$variables) {
 function bootsass_preprocess_block_menu(&$variables) {
   if ($variables['name'] == 'menu_main_menu') {
     if (!empty($variables['context']) && $variables['context'] == 'header') {
-      $variables['attributes_array']['class'][] = 'pull-right';
+      $variables['attributes_array']['class']['pull-right'] = 'pull-right';
 
-      $variables['content_attributes_array']['class'][] = 'navbar';
-      $variables['content_attributes_array']['class'][] = 'navbar-default';
-      $variables['content_attributes_array']['class'][] = 'pull-right';
+      $variables['content_attributes_array']['class']['navbar']         = 'navbar';
+      $variables['content_attributes_array']['class']['navbar-default'] = 'navbar-default';
+      $variables['content_attributes_array']['class']['pull-right']     = 'pull-right';
 
       $variables['hide_empty_title'] = TRUE;
 
@@ -56,14 +56,14 @@ function bootsass_preprocess_links(&$variables) {
   if (!empty($variables['menu'])) {
     if ($variables['menu'] == 'menu_main_menu') {
       if (!empty($variables['context']) && $variables['context'] == 'header') {
-        $variables['attributes']['class'][] = 'nav';
-        $variables['attributes']['class'][] = 'navbar-nav';
-        $variables['attributes']['class'][] = 'navbar-right';
+        $variables['attributes']['class']['nav']          = 'nav';
+        $variables['attributes']['class']['navbar-nav']   = 'navbar-nav';
+        $variables['attributes']['class']['navbar-right'] = 'navbar-right';
       }
     }
     if ($variables['menu'] == 'user-menu') {
       if (!empty($variables['context']) && $variables['context'] == 'header') {
-        $variables['attributes']['class'][] = 'pull-right';
+        $variables['attributes']['class']['pull-right'] = 'pull-right';
       }
     }
     if ($variables['menu'] == 'menu-social-menu') {
@@ -80,7 +80,7 @@ function bootsass_preprocess_links(&$variables) {
           $temp  = explode('.', array_pop($temp));
           $class = drupal_clean_css_identifier(array_shift($temp));
         }
-        $link['attributes']['class'][] = $class;
+        $link['attributes']['class']['social'] = $class;
       }
     }
   }
