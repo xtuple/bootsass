@@ -44,7 +44,7 @@ function bootsass_preprocess_layout_body_middle(&$variables) {
     }
   }
 
-  $variables['show_content_context'] = _bootsass_show_content_context();
+  $variables['show_content_context'] = bootsass_show_content_context();
   if ($variables['show_content_context'] == FALSE) {
     $col_lg = 'col-lg-12';
   }
@@ -136,12 +136,12 @@ function bootsass_preprocess_layout_content_context(&$variables) {
   $variables['blocks'] = $blocks;
 }
 
-function _bootsass_show_content_context() {
-  return !drupal_match_menu_path(menu_get_original_path(), _bootsass_page_without_content_context());
+function bootsass_show_content_context() {
+  return !drupal_match_menu_path(menu_get_original_path(), bootsass_page_exclude_content_context());
 }
 
-function _bootsass_page_without_content_context() {
-  return array(
+function bootsass_page_exclude_content_context() {
+  $exclude_context = array(
     'cart',
     'checkout',
     'checkout/%commerce_order',
@@ -149,4 +149,8 @@ function _bootsass_page_without_content_context() {
     'user/*',
     'user/*/*',
   );
+
+  drupal_alter('bootsass_page_exclude_content_context', $exclude_context);
+
+  return $exclude_context;
 }
