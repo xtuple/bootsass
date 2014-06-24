@@ -25,21 +25,14 @@ function bootcommerce_preprocess_layout_content_context(&$variables) {
   $blocks = array();
 
   $panel    = new \CDD\Bootstrap\Drupal\Panel('categories-tree', xdruple_queries_categories_tree_block(), t('Categories'));
-  $blocks[] = $panel->theme();
+  $blocks[] = $panel->render(-10);
 
   /** @var stdClass $user */
   global $user;
   if ($user->uid == 0) {
     $panel    = new \Xtuple\Xcommerce\Panels\FormPanel('user_login_block', 'Login');
-    $blocks[] = $panel->theme();
+    $blocks[] = $panel->render();
   }
 
   $variables['blocks'] = $blocks;
-}
-
-function bootcommerce_process_layout_content_context(&$variables) {
-  if (!empty($variables['blocks']['categories_tree'])) {
-    $variables['categories_tree'] = $variables['blocks']['categories_tree'];
-    unset($variables['blocks']['categories_tree']);
-  }
 }
