@@ -24,8 +24,14 @@ function bootcommerce_preprocess_layout_header(&$variables) {
 function bootcommerce_preprocess_layout_content_context(&$variables) {
   $blocks = array();
 
-  $panel    = new \CDD\Bootstrap\Drupal\Panel('categories-tree', xdruple_queries_categories_tree_block(), t('Categories'));
-  $blocks[] = $panel->render(-10);
+  if (drupal_match_menu_path(array(
+    'products',
+    'products/*'
+  ))
+  ) {
+    $panel    = new \CDD\Bootstrap\Drupal\Panel('categories-tree', xdruple_queries_categories_tree_block(), t('Categories'));
+    $blocks[] = $panel->render(-10);
+  }
 
   /** @var stdClass $user */
   global $user;

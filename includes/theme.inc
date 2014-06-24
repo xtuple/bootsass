@@ -137,7 +137,7 @@ function bootsass_preprocess_layout_content_context(&$variables) {
 }
 
 function bootsass_show_content_context() {
-  return !drupal_match_menu_path(menu_get_original_path(), bootsass_page_exclude_content_context());
+  return !drupal_match_menu_path(bootsass_page_exclude_content_context());
 }
 
 function bootsass_page_exclude_content_context() {
