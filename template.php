@@ -85,3 +85,13 @@ function bootsass_preprocess_links(&$variables) {
     }
   }
 }
+
+/**
+ * @see theme_date_all_day_label()
+ * @see date_all_day.module
+ *
+ * @return string
+ */
+function bootsass_date_all_day_label() {
+  return '';
+}
