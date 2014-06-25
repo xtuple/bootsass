@@ -50,9 +50,9 @@ function bootsass_preprocess_layout_body_middle(&$variables) {
   }
   else {
     $col_lg                                          = 'col-lg-9';
-    $variables['context_wrap_attributes']['class'][] = 'col-lg-3';
+    $variables['context_wrap_attributes']['class']['col-lg'] = 'col-lg-3';
   }
-  $variables['content_wrap_attributes']['class'][] = $col_lg;
+  $variables['content_wrap_attributes']['class']['col-lg'] = $col_lg;
 }
 
 /**
