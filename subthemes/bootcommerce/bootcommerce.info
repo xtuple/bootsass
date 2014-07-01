@@ -7,7 +7,7 @@ base theme = bootsass
 scripts[] = js/ft/ft_commerce.js
 
 compass[process][] = bootcommerce.screen.sass
-compass[params][] = bootcommerce/_params.sass
+compass[params][] = bootcommerce/_params
 
 compass[theme][stylesheets][all][] = bootcommerce.screen.css
 compass[theme][stylesheets][print][] = bootcommerce.print.css
