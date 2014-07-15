@@ -95,3 +95,25 @@ function bootsass_preprocess_links(&$variables) {
 function bootsass_date_all_day_label() {
   return '';
 }
+
+/**
+ * @see template_preprocess_field()
+ */
+function bootsass_preprocess_field(&$variables) {
+  if (!empty($variables['element']['#field_type'])
+    && $variables['element']['#field_type'] == 'text_with_summary'
+  ) {
+    $variables['classes_array'][] = 'htmlpurified';
+  }
+}
+
+/**
+ * @see template_preprocess_views_view_field()
+ */
+function bootsass_preprocess_views_view_field(&$variables) {
+  if (!empty($variables['field']->field_info['type'])
+    && $variables['field']->field_info['type'] == 'text_with_summary'
+  ) {
+    $variables['field']->options['element_wrapper_class'] .= ' htmlpurified';
+  }
+}
