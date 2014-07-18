@@ -42,3 +42,24 @@ function bootcommerce_preprocess_layout_content_context(&$variables) {
 
   $variables['blocks'] = $blocks;
 }
+
+/**
+ * @see template_preprocess_xdruple_commerce_similar_product_link_default()
+ */
+function bootcommerce_preprocess_xdruple_commerce_similar_product_link_default(&$variables) {
+  $variables['thumbnail_attributes_array']['class'][] = 'thumbnail';
+}
+
+/**
+ * @see template_preprocess_field()
+ */
+function bootcommerce_preprocess_field(&$variables) {
+  if ($variables['element']['#field_name'] == 'substitutes') {
+    $variables['content_attributes_array']['class']['row'] = 'row';
+
+    foreach ($variables['items'] as $i => $item) {
+      $variables['item_attributes_array'][$i]['class']['col-lg'] = 'col-lg-4';
+    }
+    $variables['row_by'] = 3;
+  }
+}
