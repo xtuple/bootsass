@@ -105,6 +105,27 @@ function bootsass_preprocess_field(&$variables) {
   ) {
     $variables['classes_array'][] = 'htmlpurified';
   }
+
+  $variables['row_by'] = 1;
+  $variables['content_attributes_array']['class']['field-items'] = 'field-items';
+  $variables['group_attributes_array']['class']['field-items-group'] = 'field-items-group';
+  $variables['group_attributes_array']['class']['clearfix'] = 'clearfix';
+
+  foreach ($variables['items'] as $i => $item) {
+    $variables['item_attributes_array'][$i]['class']['field-item'] = 'field-item';
+    $count = 'even';
+    if ($i % 2) {
+      $count = 'odd';
+    }
+    $variables['item_attributes_array'][$i]['class']['count'] = $count;
+  }
+}
+
+/**
+ * @see template_process_field()
+ */
+function bootsass_process_field(&$variables) {
+  $variables['group_attributes'] = drupal_attributes($variables['group_attributes_array']);
 }
 
 /**
