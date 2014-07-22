@@ -7,14 +7,14 @@
 function bootsass_theme() {
   $items = array();
 
-  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('header');
-  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('body_top');
-  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('body_middle');
-  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('body_bottom');
-  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('content_top');
-  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('content_bottom');
-  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('content_context');
-  $items += \Xtuple\Xcommerce\Theme\Layout::themeDefinition('footer');
+  $items += \CDD\OpenCDD\Theme\Layout::themeDefinition('header');
+  $items += \CDD\OpenCDD\Theme\Layout::themeDefinition('body_top');
+  $items += \CDD\OpenCDD\Theme\Layout::themeDefinition('body_middle');
+  $items += \CDD\OpenCDD\Theme\Layout::themeDefinition('body_bottom');
+  $items += \CDD\OpenCDD\Theme\Layout::themeDefinition('content_top');
+  $items += \CDD\OpenCDD\Theme\Layout::themeDefinition('content_bottom');
+  $items += \CDD\OpenCDD\Theme\Layout::themeDefinition('content_context');
+  $items += \CDD\OpenCDD\Theme\Layout::themeDefinition('footer');
 
   return $items;
 }

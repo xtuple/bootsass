@@ -36,7 +36,7 @@ function bootcommerce_preprocess_layout_content_context(&$variables) {
   /** @var stdClass $user */
   global $user;
   if ($user->uid == 0) {
-    $panel    = new \Xtuple\Xcommerce\Panels\FormPanel('user_login_block', 'Login');
+    $panel    = new \CDD\OpenCDD\Panels\FormPanel('user_login_block', 'Login');
     $blocks[] = $panel->render();
   }
 
