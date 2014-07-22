@@ -77,7 +77,7 @@ function bootcommerce_preprocess_field(&$variables) {
 /**
  * @see template_preprocess_entity()
  */
-function kellyhayes_preprocess_entity(&$variables) {
+function bootcommerce_preprocess_entity(&$variables) {
   if ($variables['view_mode'] == 'full'
     && $variables['entity_type'] == 'commerce_product'
   ) {
