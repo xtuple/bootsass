@@ -29,7 +29,7 @@ function bootcommerce_preprocess_layout_content_context(&$variables) {
     'products/*'
   ))
   ) {
-    $panel = new \CDD\Bootstrap\Drupal\Panel('categories-tree', xdruple_queries_categories_tree_block(), t('Categories'));
+    $panel = new \Xtuple\XdrupleQueries\Theme\CategoriesDropdown();
     $blocks[] = $panel->render(-10);
   }
 
