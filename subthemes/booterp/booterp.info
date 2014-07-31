@@ -1,0 +1,10 @@
+name = BootERP
+description = Default theme for xTuple ERP solution websites
+core = 7.x
+engine = phptemplate
+base theme = bootsass
+
+compass[process][] = booterp.sass
+compass[params][] = booterp/_params
+
+compass[theme][stylesheets][all][] = booterp.css
