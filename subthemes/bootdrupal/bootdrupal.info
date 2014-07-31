@@ -1,0 +1,10 @@
+name = BootDrupal
+description = Default theme for xTuple Drupal solution websites
+core = 7.x
+engine = phptemplate
+base theme = bootsass
+
+compass[process][] = bootdrupal.sass
+compass[params][] = bootdrupal/_params
+
+compass[theme][stylesheets][all][] = bootdrupal.css
