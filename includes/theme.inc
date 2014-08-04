@@ -5,20 +5,20 @@
  */
 function bootsass_preprocess_layout_header(&$variables) {
   $variables['site_phone'] = theme('block_block', array(
-    'name'    => 'site-phone',
-    'title'   => variable_get('header_site_phone_title'),
+    'name' => 'site-phone',
+    'title' => variable_get('header_site_phone_title'),
     'content' => variable_get('site_phone_value'),
   ));
 
   $variables['logo'] = '<div class="b-logo">' . l('Logo', '<front>') . '</div>';
 
   $variables['main_menu'] = theme('block_menu', array(
-    'name'    => 'menu_main_menu',
+    'name' => 'menu_main_menu',
     'context' => 'header',
   ));
 
   $variables['user_menu'] = theme('block_menu', array(
-    'name'    => 'user-menu',
+    'name' => 'user-menu',
     'context' => 'header',
   ));
 }
@@ -28,7 +28,7 @@ function bootsass_preprocess_layout_header(&$variables) {
  * Preprocess function for layout-body-top.tpl.php
  */
 function bootsass_preprocess_layout_body_top(&$variables) {
-  $variables['messages']   = theme('status_messages');
+  $variables['messages'] = theme('status_messages');
   $variables['breadcrumb'] = theme('breadcrumb', array(
     'breadcrumb' => drupal_get_breadcrumb(),
   ));
@@ -49,7 +49,7 @@ function bootsass_preprocess_layout_body_middle(&$variables) {
     $col_lg = 'col-lg-12';
   }
   else {
-    $col_lg                                          = 'col-lg-9';
+    $col_lg = 'col-lg-9';
     $variables['context_wrap_attributes']['class']['col-lg'] = 'col-lg-3';
   }
   $variables['content_wrap_attributes']['class']['col-lg'] = $col_lg;
@@ -67,40 +67,40 @@ function bootsass_preprocess_layout_body_bottom(&$variables) {
  */
 function bootsass_preprocess_layout_footer(&$variables) {
   $variables['main_menu'] = theme('block_menu', array(
-    'name'  => 'menu_main_menu',
+    'name' => 'menu_main_menu',
     'title' => variable_get('footer_main_menu_title', 'Main menu'),
   ));
 
   $variables['secondary_menu'] = theme('block_menu', array(
-    'name'  => 'menu_secondary_menu',
+    'name' => 'menu_secondary_menu',
     'title' => variable_get('footer_secondary_menu_title', 'Secondary menu'),
   ));
 
   $variables['user_menu'] = theme('block_menu', array(
-    'name'  => 'user-menu',
+    'name' => 'user-menu',
     'title' => variable_get('footer_user_menu_title', 'User menu'),
   ));
 
   $variables['contact_info'] = theme('block_block', array(
-    'name'    => 'contact-info',
-    'title'   => variable_get('footer_contacts_title'),
+    'name' => 'contact-info',
+    'title' => variable_get('footer_contacts_title'),
     'content' => format_text_variable_get('footer_contacts_value'),
   ));
 
   $variables['site_phone'] = theme('block_block', array(
-    'name'    => 'site-phone',
-    'title'   => variable_get('footer_site_phone_title'),
+    'name' => 'site-phone',
+    'title' => variable_get('footer_site_phone_title'),
     'content' => variable_get('site_phone_value'),
   ));
 
   $variables['social_menu'] = theme('block_menu', array(
-    'name'  => 'menu-social-menu',
+    'name' => 'menu-social-menu',
     'title' => variable_get('footer_social_menu_title', 'Social menu'),
   ));
 
   $variables['copyright'] = theme('block_block', array(
-    'name'             => 'site-copyright',
-    'content'          => format_text_variable_get('site_copyright'),
+    'name' => 'site-copyright',
+    'content' => format_text_variable_get('site_copyright'),
     'attributes_array' => array(
       'class' => array('well b-copyright'),
     ),
@@ -112,12 +112,12 @@ function bootsass_preprocess_layout_footer(&$variables) {
  */
 function bootsass_preprocess_layout_content_top(&$variables) {
   $variables['tabs'] = theme('menu_local_tasks', array(
-    'primary'   => menu_primary_local_tasks(),
+    'primary' => menu_primary_local_tasks(),
     'secondary' => menu_secondary_local_tasks(),
   ));
 
   $variables['title'] = drupal_get_title();
-  $variables['help']  = menu_get_active_help();
+  $variables['help'] = menu_get_active_help();
 }
 
 /**

@@ -23,17 +23,17 @@ function bootsass_theme() {
  * Preprocess function for page.tpl.php
  */
 function bootsass_preprocess_page(&$variables) {
-  $variables['header']   = theme('layout_header');
+  $variables['header'] = theme('layout_header');
   $variables['body_top'] = theme('layout_body_top');
 
   $variables['body_middle'] = theme('layout_body_middle', array(
     'content_middle' => $variables['page']['content'],
-    'content_top'    => theme('layout_content_top'),
+    'content_top' => theme('layout_content_top'),
     'content_bottom' => theme('layout_content_bottom'),
-    'context'        => theme('layout_content_context'),
+    'context' => theme('layout_content_context'),
   ));
   $variables['body_bottom'] = theme('layout_body_bottom');
-  $variables['footer']      = theme('layout_footer');
+  $variables['footer'] = theme('layout_footer');
 }
 
 function bootsass_preprocess_block_menu(&$variables) {
@@ -41,9 +41,9 @@ function bootsass_preprocess_block_menu(&$variables) {
     if (!empty($variables['context']) && $variables['context'] == 'header') {
       $variables['attributes_array']['class']['pull-right'] = 'pull-right';
 
-      $variables['content_attributes_array']['class']['navbar']         = 'navbar';
+      $variables['content_attributes_array']['class']['navbar'] = 'navbar';
       $variables['content_attributes_array']['class']['navbar-default'] = 'navbar-default';
-      $variables['content_attributes_array']['class']['pull-right']     = 'pull-right';
+      $variables['content_attributes_array']['class']['pull-right'] = 'pull-right';
 
       $variables['hide_empty_title'] = TRUE;
 
@@ -56,8 +56,8 @@ function bootsass_preprocess_links(&$variables) {
   if (!empty($variables['menu'])) {
     if ($variables['menu'] == 'menu_main_menu') {
       if (!empty($variables['context']) && $variables['context'] == 'header') {
-        $variables['attributes']['class']['nav']          = 'nav';
-        $variables['attributes']['class']['navbar-nav']   = 'navbar-nav';
+        $variables['attributes']['class']['nav'] = 'nav';
+        $variables['attributes']['class']['navbar-nav'] = 'navbar-nav';
         $variables['attributes']['class']['navbar-right'] = 'navbar-right';
       }
     }
@@ -76,8 +76,8 @@ function bootsass_preprocess_links(&$variables) {
           $class = 'mailto';
         }
         else {
-          $temp  = explode('/', $link['href']);
-          $temp  = explode('.', array_pop($temp));
+          $temp = explode('/', $link['href']);
+          $temp = explode('.', array_pop($temp));
           $class = drupal_clean_css_identifier(array_shift($temp));
         }
         $link['attributes']['class']['social'] = $class;

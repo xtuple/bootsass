@@ -1,18 +1,18 @@
-(function($) {
+(function ($) {
   $(document).ready(function () {
     var view$ = $('.view-ft-commerce-xd-products');
-    view$.find('.views-columns').each(function() {
+    view$.find('.views-columns').each(function () {
       var parent$ = $(this);
       equalHeights(parent$, '.views-field-subTitle');
       equalHeights(parent$, '.views-field-title');
     });
   });
 
-  var equalHeights = function(parent$, selector) {
+  var equalHeights = function (parent$, selector) {
     var blocks$ = parent$.find(selector);
     var maxHeight = blocks$.height();
 
-    blocks$.each(function() {
+    blocks$.each(function () {
       var h = $(this).height();
       if (h > maxHeight) {
         maxHeight = h;
