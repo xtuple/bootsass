@@ -1,4 +1,4 @@
-<div id="header-wrap" class="container">
+<div id="header-wrap" class="container l-header">
   <div class="row">
     <div class="col-lg-3">
       <?php if (!empty($site_phone)): ?>

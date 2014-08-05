@@ -1,0 +1,57 @@
+@import "mixins/logo"
+@import "mixins/social-menu"
+
+.b-logo
+  +logo(170px, 170px)
+
+.b-menu-social-menu--content
+  +social-menu()
+
+.l-header
+  .b-block-site-phone,
+  .b-menu-user-menu
+    height: 30px
+  .b-block-site-phone--title
+    color: $gray-light
+    display: inline-block
+    font-size: $font-size-base
+  .b-block-site-phone--content
+    color: $brand-primary
+    display: inline-block
+    font-size: $font-size-large
+  .b-menu-user-menu
+    ul.links
+      margin: 0
+      padding: 0
+      li
+        border-left: 1px solid $link-color
+        float: left
+        font-size: $font-size-large
+        list-style: none
+        margin: 0 0 0 15px
+        padding: 0 0 0 15px
+        &.first
+          border: none
+  .b-menu-main-menu
+    clear: both
+    margin-top: 20px
+    .b-menu-main-menu--content
+      ul.links
+        margin-left: - ($grid-gutter-width / 2)
+        li.active-trail
+          @extend .active
+
+#footer
+  .footer-top
+    margin-bottom: 2em
+    .b-menu--title,
+    .b-block--title
+      @extend h4
+    ul
+      padding: 0
+      li
+        list-style: none
+  .b-block-contact-info
+    margin-bottom: 20px
+  .b-copyright 
+    margin: 0 -20px

@@ -158,7 +158,6 @@ function bootsass_preprocess_views_view_field(&$variables) {
   }
 }
 
-
 /**
  * Preprocess function for layout-header.tpl.php
  */
