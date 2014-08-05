@@ -33,13 +33,6 @@ function bootcommerce_preprocess_layout_content_context(&$variables) {
     $blocks[] = $panel->render(-10);
   }
 
-  /** @var stdClass $user */
-  global $user;
-  if ($user->uid == 0) {
-    $panel = new \CDD\OpenCDD\Panels\FormPanel('user_login_block', 'Login');
-    $blocks[] = $panel->render();
-  }
-
   $variables['blocks'] = $blocks;
 }
 

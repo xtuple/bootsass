@@ -291,6 +291,13 @@ function bootsass_preprocess_layout_content_bottom(&$variables) {
 function bootsass_preprocess_layout_content_context(&$variables) {
   $blocks = array();
 
+  /** @var stdClass $user */
+  global $user;
+  if ($user->uid == 0) {
+    $panel = new \CDD\OpenCDD\Panels\FormPanel('user_login_block', 'Login');
+    $blocks['user_login_block'] = $panel->render();
+  }
+
   $variables['blocks'] = $blocks;
 }
 
