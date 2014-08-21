@@ -7,7 +7,9 @@
  * @var string  $title
  * @var string  $content_attributes
  * @var string  $context_attributes
+ * @var string  $characteristics_attributes
  * @var string  $bottom_attributes
+ * @var string  $characteristics_title
  */
 ?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
@@ -29,6 +31,13 @@
   <?php if (!empty($context)): ?>
     <div<?php print $context_attributes; ?>>
       <?php print render($context); ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if (!empty($characteristics)): ?>
+    <div<?php print $characteristics_attributes ?>>
+      <h4><?php print $characteristics_title ?></h4>
+      <?php print render($characteristics); ?>
     </div>
   <?php endif; ?>
 

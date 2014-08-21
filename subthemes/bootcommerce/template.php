@@ -82,7 +82,11 @@ function bootcommerce_preprocess_entity(&$variables) {
       ),
     );
 
+    $variables['characteristics_attributes_array']['class']['xt-chars-wrapper'] = 'xt-chars-wrapper';
+    $variables['characteristics_attributes_array']['class']['col-lg'] = 'col-lg-12';
     $variables['bottom_attributes_array']['class']['col-lg'] = 'col-lg-12';
+
+    $variables['characteristics_title'] = t('Characteristics');
 
     if (!empty($variables['content']['product_price']['#weight'])) {
       $price = new \CDD\Bootstrap\Drupal\Label($variables['content']['product_price']['#markup'], \CDD\Bootstrap\Common\Context::PRIMARY);
@@ -109,6 +113,11 @@ function bootcommerce_preprocess_entity(&$variables) {
       }
     }
 
+    if (!empty($variables['content']['xt_chars'])) {
+      $variables['characteristics'] = $variables['content']['xt_chars'];
+      unset($variables['content']['xt_chars']);
+    }
+
     $bottom_fields = array(
       'substitutes',
     );
@@ -128,6 +137,7 @@ function bootcommerce_process_entity(&$variables) {
   if ($variables['view_mode'] == 'full' && $variables['entity_type'] == 'commerce_product') {
     $variables['context_attributes'] = drupal_attributes($variables['context_attributes_array']);
     $variables['bottom_attributes'] = drupal_attributes($variables['bottom_attributes_array']);
+    $variables['characteristics_attributes'] = drupal_attributes($variables['characteristics_attributes_array']);
   }
 }
 
