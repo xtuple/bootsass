@@ -22,7 +22,7 @@ function bootcommerce_preprocess_layout_header(&$variables) {
  * Preprocess function for layout-content-context.tpl.php
  */
 function bootcommerce_preprocess_layout_content_context(&$variables) {
-  $blocks = array();
+  $blocks = &$variables['blocks'];
 
   if (drupal_match_menu_path(array(
     'products',
@@ -30,10 +30,8 @@ function bootcommerce_preprocess_layout_content_context(&$variables) {
   ))
   ) {
     $panel = new \Xtuple\XdrupleQueries\Theme\CategoriesDropdown();
-    $blocks[] = $panel->render(-10);
+    $blocks['categories_dropdown'] = $panel->render(-10);
   }
-
-  $variables['blocks'] = $blocks;
 }
 
 /**
