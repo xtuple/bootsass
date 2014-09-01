@@ -98,7 +98,6 @@ form
         margin: $vertical-margin 0
 
 #payment-details
-  @extend .row
   .form-item-commerce-payment-payment-details-credit-card-owner,
   .form-item-commerce-payment-payment-details-credit-card-number,
   .form-type-select.form-item-commerce-payment-payment-details-credit-card-type
@@ -114,6 +113,12 @@ form
     .form-select
       +inline-block()
       width: auto
+
+fieldset.commerce_payment
+  .fieldset-wrapper
+    margin: 0 20px
+    label
+      padding-left: 0
 
 .entity-commerce-product
   form.commerce-add-to-cart
