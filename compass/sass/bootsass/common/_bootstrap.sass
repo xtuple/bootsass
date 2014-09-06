@@ -3,6 +3,18 @@ a
   &:focus
     outline: none
 
+.alert-success a
+  color: darken($alert-success-text, 10%)
+
+.alert-info a
+  color: darken($alert-info-text, 10%)
+
+.alert-warning a
+  color: darken($alert-warning-text, 10%)
+
+.alert-danger a
+  color: darken($alert-danger-text, 10%)
+
 .nav.nav-tabs
   margin-bottom: 20px
 
@@ -23,3 +35,37 @@ a
     margin-right: 10px
   &.pull-right
     margin-left: 10px
+
+.panel-primary .panel-footer
+  color: $panel-primary-text
+  background-color: $panel-primary-heading-bg
+  border-color: $panel-primary-border
+
+.panel-success .panel-footer
+  color: $panel-success-text
+  background-color: $panel-success-heading-bg
+  border-color: $panel-success-border
+
+.panel-warning .panel-footer
+  color: $panel-warning-text
+  background-color: $panel-warning-heading-bg
+  border-color: $panel-warning-border
+
+.panel-danger .panel-footer
+  color: $panel-danger-text
+  background-color: $panel-danger-heading-bg
+  border-color: $panel-danger-border
+
+.panel-info .panel-footer
+  color: $panel-info-text
+  background-color: $panel-info-heading-bg
+  border-color: $panel-info-border
+
+input,
+select,
+textarea
+  width: auto
+
+.input-group input,
+.input-group select
+  width: auto
