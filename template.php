@@ -313,6 +313,8 @@ function bootsass_page_exclude_content_context() {
     'checkout/%commerce_order/%commerce_checkout_page',
     'user/*',
     'user/*/*',
+    'bootstrap',
+    'bootstrap/*',
   );
 
   drupal_alter('bootsass_page_exclude_content_context', $exclude_context);
