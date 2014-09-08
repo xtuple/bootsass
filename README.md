@@ -29,11 +29,6 @@ SASS structure
 + `params/_bootstrap.sass` — default parameters for Bootstrap (shouldn't be changed);
 + `params/_bootsass.sass` — keeps parameters overrides for Bootstrap and other parameters for exact project;
 + `bootstrap` — Bootstrap 3 itself; all parameters should be ready at this moment;
-+ `common/_base.sass` — (recommended) keeps tags styles;
-+ `common/_layout.sass` — (recommended) keeps layout styles; 
-+ `common/_forms.sass` — (recommended) keeps forms styles;
-+ `common/_bootstrap.sass` — (recommended) keeps Boostrap classes styles (overrides and extensions);
-+ `common/_styles.sass` — keeps all other styles that can't be clearly categorised;
 
 Also recommended create and import own SASS file for each content type (`ct_`) feature (e. g. `ct/_faq.sass`)
 
