@@ -22,7 +22,7 @@ function bootcommerce_preprocess_layout_header(&$variables) {
  * Preprocess function for layout-content-context.tpl.php
  */
 function bootcommerce_preprocess_layout_content_context(&$variables) {
-  $blocks = &$variables['blocks'];
+  $blocks = & $variables['blocks'];
 
   if (drupal_match_menu_path(array(
     'products',
@@ -86,13 +86,26 @@ function bootcommerce_preprocess_entity(&$variables) {
 
     $variables['characteristics_title'] = t('Characteristics');
 
+//    if (!empty($variables['content']['product_price']['#weight'])) {
+//      $price = new \CDD\Bootstrap\Drupal\Label($variables['content']['product_price']['#markup'], \CDD\Bootstrap\Common\Context::PRIMARY);
+//      $variables['content']['product_price'] = $price->render(-11);
+//      $variables['content']['product_price']['#prefix'] = '<div class="field field-product-price">';
+//      $variables['content']['product_price']['#suffix'] = '</div>';
+//      unset($variables['content']['product_price']['#markup']);
+//    }
+
     if (!empty($variables['content']['product_price']['#weight'])) {
-      $price = new \CDD\Bootstrap\Drupal\Label($variables['content']['product_price']['#markup'], \CDD\Bootstrap\Common\Context::PRIMARY);
-      $variables['content']['product_price'] = $price->render(-11);
-      $variables['content']['product_price']['#prefix'] = '<div class="field field-product-price">';
+      $variables['content']['product_price']['#prefix'] = '<div class="field field-product-price field-label-above">';
       $variables['content']['product_price']['#suffix'] = '</div>';
-      unset($variables['content']['product_price']['#markup']);
+      $variables['content']['product_price']['#weight'] = -11;
+      $markup = '';
+      $markup .= '<div class="field-label">' . t('Price') . ':&nbsp;</div>';
+      $markup .= '<div class="field-item">' . $variables['content']['product_price']['#markup'] . '</div>';
+      $variables['content']['product_price']['#markup'] = $markup;
+
+      //kpr($variables['content']);
     }
+
     if (!empty($variables['content']['add_to_cart']['#weight'])) {
       $variables['content']['add_to_cart']['#weight'] = -10;
     }
@@ -168,4 +181,20 @@ function bootcommerce_file_link(&$variables) {
   }
 
   return '<span class="file">' . $icon . ' ' . l($link_text, $url, $options) . '</span>';
+}
+
+/**
+ * Implements hook_form_alter()
+ *
+ * @param $form
+ * @param $form_state
+ * @param $form_id
+ */
+function bootcommerce_form_alter(&$form, &$form_state, $form_id) {
+  if (!empty($form['#attributes']['class'][0])) {
+    if ($form['#attributes']['class'][0] == 'commerce-add-to-cart') {
+      $form['#attributes']['class'][] = 'clearfix';
+      unset($form['quantity']['#title']);
+    }
+  }
 }
