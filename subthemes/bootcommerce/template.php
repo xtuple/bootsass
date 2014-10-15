@@ -22,7 +22,7 @@ function bootcommerce_preprocess_layout_header(&$variables) {
  * Preprocess function for layout-content-context.tpl.php
  */
 function bootcommerce_preprocess_layout_content_context(&$variables) {
-  $blocks = & $variables['blocks'];
+  $blocks = &$variables['blocks'];
 
   if (drupal_match_menu_path(array(
     'products',
@@ -220,8 +220,8 @@ function bootcommerce_file_link(&$variables) {
 function bootcommerce_form_alter(&$form, &$form_state, $form_id) {
   if (!empty($form['#attributes']['class'][0])) {
     if ($form['#attributes']['class'][0] == 'commerce-add-to-cart') {
-      $form['#attributes']['class'][] = 'clearfix';
-      unset($form['quantity']['#title']);
+      $form['#attributes']['class']['clearfix'] = 'clearfix';
+      $form['quantity']['#title_display'] = 'invisible';
     }
   }
 }
