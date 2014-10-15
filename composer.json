@@ -1,7 +1,7 @@
 {
   "name": "themes/xtuple/bootsass",
   "description": "Base theme for xTuple website",
-  "type": "library",
+  "type": "drupal-extension",
   "license": "GPL-2.0",
   "authors": [
     {
