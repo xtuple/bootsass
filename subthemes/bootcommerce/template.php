@@ -91,12 +91,19 @@ function bootcommerce_preprocess_entity(&$variables) {
     $variables['characteristics_title'] = t('Characteristics');
 
     if (!empty($variables['content']['product_price']['#weight'])) {
-      $price = new \CDD\Bootstrap\Drupal\Label($variables['content']['product_price']['#markup'], \CDD\Bootstrap\Common\Context::PRIMARY);
-      $variables['content']['product_price'] = $price->render(-11);
-      $variables['content']['product_price']['#prefix'] = '<div class="field field-product-price">';
+      $variables['content']['product_price']['#prefix'] = '<div class="field field-product-price field-label-above">';
       $variables['content']['product_price']['#suffix'] = '</div>';
-      unset($variables['content']['product_price']['#markup']);
+      $variables['content']['product_price']['#weight'] = -11;
+      $markup = '';
+      $markup .= '<div class="field-label">' . t('Price') . ':&nbsp;</div>';
+      $unit = $variables['content']['inventoryUnit']['#items'][0]['value'];
+      $units = entity_load('xtuple_unit');
+
+      $markup .= '<div class="field-item"><span>' . $variables['content']['product_price']['#markup'] .
+        '</span><small> / ' . $units[$unit]->description . '</small>' . '</div>';
+      $variables['content']['product_price']['#markup'] = $markup;
     }
+
     if (!empty($variables['content']['add_to_cart']['#weight'])) {
       $variables['content']['add_to_cart']['#weight'] = -10;
     }
@@ -108,6 +115,19 @@ function bootcommerce_preprocess_entity(&$variables) {
       'xt_url_file_field',
       'xt_url_link_field',
     );
+
+    if (module_exists('xdruple_favorites')) {
+      if (($customer = xdruple_rescued_session_get('customer'))
+        && ($ship_to = xdruple_rescued_session_get('ship_to'))
+      ) {
+        $product_id = $variables['content']['product_id']['#items'][0]['value'];
+        $form = xdruple_favorites_get_favorites_form($product_id, $customer, $ship_to);
+        $variables['content']['add_to_standard']['#markup'] = drupal_render($form);
+        $variables['content']['add_to_standard']['#weight'] = '-9';
+      }
+      $context_fields[] = 'add_to_standard';
+    }
+
     foreach ($context_fields as $field) {
       if (!empty($variables['content'][$field])) {
         $variables['context'][$field] = $variables['content'][$field];
@@ -130,6 +150,26 @@ function bootcommerce_preprocess_entity(&$variables) {
       }
     }
   }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for xdruple_favorites_add_to_favorites_form
+ *
+ * @see xdruple_favorites_add_to_favorites_form()
+ */
+function bootcommerce_form_xdruple_favorites_add_to_favorites_form_alter(&$form, &$form_state) {
+  $form['submit']['#value'] = '<i class="glyphicon glyphicon-star-empty"></i> Add to Favorites';
+  $form['submit']['#attributes']['class']['btn-add-favorites'] = 'btn-add-favorites';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for xdruple_favorites_remove_from_favorites
+ *
+ * @see xdruple_favorites_remove_from_favorites_form()
+ */
+function bootcommerce_form_xdruple_favorites_remove_from_favorites_form_alter(&$form, &$form_state) {
+  $form['submit']['#value'] = '<i class="glyphicon glyphicon-star"></i> Remove from Favorites';
+  $form['submit']['#attributes']['class']['btn-remove-favorites'] = 'btn-remove-favorites';
 }
 
 /**
@@ -172,4 +212,20 @@ function bootcommerce_file_link(&$variables) {
   }
 
   return '<span class="file">' . $icon . ' ' . l($link_text, $url, $options) . '</span>';
+}
+
+/**
+ * Implements hook_form_alter()
+ *
+ * @param $form
+ * @param $form_state
+ * @param $form_id
+ */
+function bootcommerce_form_alter(&$form, &$form_state, $form_id) {
+  if (!empty($form['#attributes']['class'][0])) {
+    if ($form['#attributes']['class'][0] == 'commerce-add-to-cart') {
+      $form['#attributes']['class']['clearfix'] = 'clearfix';
+      $form['quantity']['#title_display'] = 'invisible';
+    }
+  }
 }
