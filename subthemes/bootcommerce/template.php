@@ -80,6 +80,10 @@ function bootcommerce_preprocess_entity(&$variables) {
       ),
     );
 
+    $variables['content']['inventoryUnit']['#access'] = TRUE;
+    $variables['content']['priceUnit']['#access'] = FALSE;
+    $variables['content']['inventoryUnit']['#weight'] = $variables['content']['priceUnit']['#weight'];
+
     $variables['characteristics_attributes_array']['class']['xt-chars-wrapper'] = 'xt-chars-wrapper';
     $variables['characteristics_attributes_array']['class']['col-lg'] = 'col-lg-12';
     $variables['bottom_attributes_array']['class']['col-lg'] = 'col-lg-12';
