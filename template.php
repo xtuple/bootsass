@@ -162,25 +162,38 @@ function bootsass_preprocess_views_view_field(&$variables) {
  * Preprocess function for layout-header.tpl.php
  */
 function bootsass_preprocess_layout_header(&$variables) {
-  $variables['site_phone'] = theme('block_block', array(
-    'name' => 'site-phone',
-    'title' => variable_get('header_site_phone_title'),
-    'content' => variable_get('site_phone_value'),
-  ));
+  $variables['site_phone_array'] = array(
+    '#theme' => 'block_block',
+    '#name' => 'site-phone',
+    '#title' => variable_get('header_site_phone_title'),
+    '#content' => variable_get('site_phone_value'),
+  );
 
   $variables['logo'] = '<div class="b-logo">' . l('Logo', '<front>') . '</div>';
 
-  $variables['main_menu'] = theme('block_menu', array(
-    'name' => 'menu_main_menu',
-    'context' => 'header',
-  ));
+  $variables['main_menu_array'] = array(
+    '#theme' => 'block_menu',
+    '#name' => 'menu_main_menu',
+    '#context' => 'header',
+  );
 
-  $variables['user_menu'] = theme('block_menu', array(
-    'name' => 'user-menu',
-    'context' => 'header',
-  ));
+  $variables['user_menu_array'] = array(
+    '#theme' => 'block_menu',
+    '#name' => 'user-menu',
+    '#context' => 'header',
+  );
 }
 
+/**
+ * Preprocess function for layout-header.tpl.php
+ *
+ * @param $variables
+ */
+function bootsass_process_layout_header(&$variables) {
+  $variables['site_phone'] = drupal_render($variables['site_phone_array']);
+  $variables['main_menu'] = drupal_render($variables['main_menu_array']);
+  $variables['user_menu'] = drupal_render($variables['user_menu_array']);
+}
 
 /**
  * Preprocess function for layout-body-top.tpl.php
@@ -217,52 +230,74 @@ function bootsass_preprocess_layout_body_middle(&$variables) {
  * Preprocess function for layout-body-bottom.tpl.php
  */
 function bootsass_preprocess_layout_body_bottom(&$variables) {
-
 }
 
 /**
  * Preprocess function for layout-footer.tpl.php
  */
 function bootsass_preprocess_layout_footer(&$variables) {
-  $variables['main_menu'] = theme('block_menu', array(
-    'name' => 'menu_main_menu',
-    'title' => variable_get('footer_main_menu_title', 'Main menu'),
-  ));
+  $variables['main_menu_array'] = array(
+    '#theme' => 'block_menu',
+    '#name' => 'menu_main_menu',
+    '#title' => variable_get('footer_main_menu_title', 'Main menu'),
+  );
 
-  $variables['secondary_menu'] = theme('block_menu', array(
-    'name' => 'menu_secondary_menu',
-    'title' => variable_get('footer_secondary_menu_title', 'Secondary menu'),
-  ));
+  $variables['secondary_menu_array'] = array(
+    '#theme' => 'block_menu',
+    '#name' => 'menu_secondary_menu',
+    '#title' => variable_get('footer_secondary_menu_title', 'Secondary menu'),
+  );
 
-  $variables['user_menu'] = theme('block_menu', array(
-    'name' => 'user-menu',
-    'title' => variable_get('footer_user_menu_title', 'User menu'),
-  ));
+  $variables['user_menu_array'] = array(
+    '#theme' => 'block_menu',
+    '#name' => 'user-menu',
+    '#title' => variable_get('footer_user_menu_title', 'User menu'),
+  );
 
-  $variables['contact_info'] = theme('block_block', array(
-    'name' => 'contact-info',
-    'title' => variable_get('footer_contacts_title'),
-    'content' => format_text_variable_get('footer_contacts_value'),
-  ));
+  $variables['contact_info_array'] = array(
+    '#theme' => 'block_block',
+    '#name' => 'contact-info',
+    '#title' => variable_get('footer_contacts_title'),
+    '#content' => format_text_variable_get('footer_contacts_value'),
+  );
 
-  $variables['site_phone'] = theme('block_block', array(
-    'name' => 'site-phone',
-    'title' => variable_get('footer_site_phone_title'),
-    'content' => variable_get('site_phone_value'),
-  ));
+  $variables['site_phone_array'] = array(
+    '#theme' => 'block_block',
+    '#name' => 'site-phone',
+    '#title' => variable_get('footer_site_phone_title'),
+    '#content' => variable_get('site_phone_value'),
+  );
 
-  $variables['social_menu'] = theme('block_menu', array(
-    'name' => 'menu-social-menu',
-    'title' => variable_get('footer_social_menu_title', 'Social menu'),
-  ));
+  $variables['social_menu_array'] = array(
+    '#theme' => 'block_menu',
+    '#name' => 'menu-social-menu',
+    '#title' => variable_get('footer_social_menu_title', 'Social menu'),
+  );
 
-  $variables['copyright'] = theme('block_block', array(
-    'name' => 'site-copyright',
-    'content' => format_text_variable_get('site_copyright'),
-    'attributes_array' => array(
+  $variables['copyright_array'] = array(
+    '#theme' => 'block_block',
+    '#name' => 'site-copyright',
+    '#content' => format_text_variable_get('site_copyright'),
+    '#attributes_array' => array(
       'class' => array('well b-copyright'),
     ),
-  ));
+  );
+}
+
+/**
+ * Process function for layout-footer.tpl.php
+ *
+ * @param $variables
+ */
+function bootsass_process_layout_footer(&$variables) {
+  $variables['main_menu'] = drupal_render($variables['main_menu_array']);
+  $variables['secondary_menu'] = drupal_render($variables['secondary_menu_array']);
+  $variables['user_menu'] = drupal_render($variables['user_menu_array']);
+
+  $variables['contact_info'] = drupal_render($variables['contact_info_array']);
+  $variables['site_phone'] = drupal_render($variables['site_phone_array']);
+  $variables['social_menu'] = drupal_render($variables['social_menu_array']);
+  $variables['copyright'] = drupal_render($variables['copyright_array']);
 }
 
 /**
