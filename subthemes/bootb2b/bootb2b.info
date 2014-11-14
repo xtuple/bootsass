@@ -1,0 +1,11 @@
+name = BootB2B
+description = Theme for B2B sites
+core = 7.x
+engine = phptemplate
+base theme = bootcommerce
+
+scripts[] = js/bootb2b.js
+
+compass[process][] = bootb2b.sass
+compass[params][] = bootb2b/_params
+compass[theme][stylesheets][all][] = bootb2b.css

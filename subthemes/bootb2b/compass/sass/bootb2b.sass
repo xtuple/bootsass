@@ -1,0 +1,130 @@
+@import "bootcommerce.screen"
+
+// common/_bootstrap.sass
+.modal-dialog
+  left: 0
+
+// common/_styles.sass
+#context-wrap
+  .b-block
+    .b-block--content
+      &.b-block-core-cart--content
+        padding: 0
+        margin: -1px
+        .empty-cart
+          padding: 10px 15px
+        .links
+          +clearfix
+          padding: 0 18px 12px
+          .link
+            float: right
+            margin-left: 10px
+            a
+              @extend .btn
+              @extend .btn-primary
+      &.b-block-core-saved-carts--content
+        padding: 0
+        margin: -1px
+        .empty-cart
+          padding: 10px 15px
+
+#status-messages
+  margin-left: - $grid-gutter-width / 2
+  position: fixed
+  top: 0
+  width: $container-large-desktop
+  z-index: 2000
+  .alert
+    @extend .alert-dismissable
+    margin-bottom: 0
+
+// ft/_ft_commerce.sass
+.view-ft-commerce-xd-products
+  .views-table
+    @extend .table
+    @extend .table-striped
+    tbody > tr > td
+      vertical-align: middle
+  th.views-field-price,
+  th.views-field-unit-price,
+  th.views-field-pack,
+  th.views-field-add-to-cart-form
+    text-align: right
+  th.views-field-add-to-standard-order
+    border: 0 !important
+    text-align: center
+  td.views-field-sku
+    width: 60px
+  td.views-field-title
+    font-weight: bold
+  td.views-field-price,
+  td.views-field-unit-price
+    text-align: right
+    width: 90px
+  td.views-field-pack
+    text-align: right
+    width: 110px
+  td.views-field-add-to-cart-form
+    border-bottom-width: 1px !important
+    text-align: right
+    width: 66px
+    form
+      +inline-block
+    .commerce-add-to-cart
+      .form-submit
+        display: none
+    .form-item-quantity
+      +inline-block
+      width: 50px
+      label
+        display: none
+      input
+        text-align: right
+      .ajax-progress
+        display: none
+  td.views-field-add-to-standard-order
+    text-align: right
+    width: 56px
+
+.view-xd-user-saved-carts-block
+  .views-field-xd-order-notes
+    +clearfix
+    .views-label
+      float: left
+      &:after
+        // content: "&nbsp;"
+        content: "\00a0"
+    .field-content
+      max-height: 20px
+      overflow: hidden
+
+.view-ft-commerce-cart-block
+  .views-content
+    @extend .list-group
+  .views-row
+    @extend .list-group-item
+    +clearfix
+  .views-field-line-item-title
+    font-weight: $fw-bold
+  .views-field-quantity
+    float: right
+    margin-left: 5px
+    text-align: right
+    width: 40px
+  .views-field-commerce-total
+    float: right
+    font-size: $font-size-large
+    text-align: right
+    width: 90px
+  .views-field-edit-delete
+    float: left
+    margin-top: 2px
+    button.delete-line-item
+      @extend .btn-xs
+  .line-item-summary
+    padding: 12px 18px 0
+  .line-item-quantity,
+  .line-item-total
+    font-size: $font-size-large
+  .cart-empty-block
+    padding: 10px 15px
