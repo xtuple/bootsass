@@ -96,3 +96,34 @@ function bootb2b_preprocess_block_menu(&$variables) {
     }
   }
 }
+
+/**
+ * Extends template_preprocess_products_page
+ */
+function bootb2b_preprocess_products_page(&$variables) {
+  unset($variables['columns']);
+}
+
+/**
+ * Extends template_preprocess_products_page_item
+ */
+function bootb2b_preprocess_products_page_item(&$variables) {
+  unset($variables['subtitle']);
+  unset($variables['img']);
+  unset($variables['read_more']);
+
+  $product = $variables['product'];
+  $variables['sku'] = $product->sku;
+  $variables['pack'] = "{$product->productWeight} {$product->weightUnit}/{$product->inventoryUnit}";
+  $unit_price = _xdruple_queries_price($product, 1, 0, FALSE) / $product->uomRatio;
+  $unit_price = commerce_currency_format($unit_price, 'USD');
+  $variables['unit_price'] = "{$unit_price}/{$product->priceUnit}";
+  $variables['price'] = "{$variables['price']}/{$product->inventoryUnit}";
+
+  if (($customer = xdruple_rescued_session_get('customer'))
+    && ($ship_to = xdruple_rescued_session_get('ship_to'))
+  ) {
+    $form = xdruple_favorites_get_favorites_form($variables['product']->product_id, $customer, $ship_to);
+    $variables['add_to_standard'] = drupal_render($form);
+  }
+}
