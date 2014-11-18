@@ -135,8 +135,9 @@ function bootcommerce_preprocess_entity(&$variables) {
       }
     }
 
-    if (!empty($variables['content']['xt_chars'])) {
-      $variables['characteristics'] = $variables['content']['xt_chars'];
+    if (!empty($variables['content']['xt_char'])) {
+      $variables['characteristics'] = $variables['content']['xt_char'];
+      $variables['characteristics']['#access'] = TRUE;
       unset($variables['content']['xt_chars']);
     }
 
