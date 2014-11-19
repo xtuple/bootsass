@@ -215,7 +215,7 @@ function bootsass_preprocess_layout_header(&$variables) {
         'header',
         'user-menu',
       ),
-      'granularity' => DRUPAL_CACHE_PER_USER,
+      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
       'expire' => time() + 24 * 60 * 60,
     ),
   );
@@ -282,7 +282,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
         'footer',
         'main-menu',
       ),
-      'granularity' => DRUPAL_CACHE_PER_USER,
+      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
       'expire' => time() + 24 * 60 * 60,
     ),
   );
@@ -296,7 +296,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
         'footer',
         'secondary-menu',
       ),
-      'granularity' => DRUPAL_CACHE_PER_USER,
+      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
       'expire' => time() + 24 * 60 * 60,
     ),
   );
@@ -310,7 +310,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
         'footer',
         'user-menu',
       ),
-      'granularity' => DRUPAL_CACHE_PER_USER,
+      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
       'expire' => time() + 24 * 60 * 60,
     ),
   );
