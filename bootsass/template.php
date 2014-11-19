@@ -277,6 +277,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_menu',
     '#name' => 'menu_main_menu',
     '#title' => variable_get('footer_main_menu_title', 'Main menu'),
+    '#title_tag' => 'h4',
     '#cache' => array(
       'keys' => array(
         'footer',
@@ -291,6 +292,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_menu',
     '#name' => 'menu_secondary_menu',
     '#title' => variable_get('footer_secondary_menu_title', 'Secondary menu'),
+    '#title_tag' => 'h4',
     '#cache' => array(
       'keys' => array(
         'footer',
@@ -305,6 +307,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_menu',
     '#name' => 'user-menu',
     '#title' => variable_get('footer_user_menu_title', 'User menu'),
+    '#title_tag' => 'h4',
     '#cache' => array(
       'keys' => array(
         'footer',
@@ -319,6 +322,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_block',
     '#name' => 'contact-info',
     '#title' => variable_get('footer_contacts_title'),
+    '#title_tag' => 'h4',
     '#content' => format_text_variable_get('footer_contacts_value'),
     '#cache' => array(
       'keys' => array(
@@ -333,6 +337,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_block',
     '#name' => 'site-phone',
     '#title' => variable_get('footer_site_phone_title'),
+    '#title_tag' => 'h4',
     '#content' => variable_get('site_phone_value'),
     '#cache' => array(
       'keys' => array(
@@ -347,6 +352,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_menu',
     '#name' => 'menu-social-menu',
     '#title' => variable_get('footer_social_menu_title', 'Social menu'),
+    '#title_tag' => 'h4',
     '#cache' => array(
       'keys' => array(
         'footer',
@@ -359,6 +365,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
   $variables['copyright_array'] = array(
     '#theme' => 'block_block',
     '#name' => 'site-copyright',
+    '#title_tag' => 'h4',
     '#content' => format_text_variable_get('site_copyright'),
     '#attributes_array' => array(
       'class' => array('well b-copyright'),
