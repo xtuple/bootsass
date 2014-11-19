@@ -230,3 +230,16 @@ function bootcommerce_form_alter(&$form, &$form_state, $form_id) {
     }
   }
 }
+
+function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_state) {
+  $form['customer_profile_shipping']['#wrapper_attributes'] = array(
+    'class' => array(
+      'row' => 'row',
+    ),
+  );
+  $form['customer_profile_billing']['#wrapper_attributes'] = array(
+    'class' => array(
+      'row' => 'row',
+    ),
+  );
+}
