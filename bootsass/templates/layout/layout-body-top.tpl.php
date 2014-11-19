@@ -1,4 +1,4 @@
-<div id="body-top-wrap" class="container">
+<div id="body-top-wrap" class="container hidden-print">
   <div class="row">
     <div class="col-lg-12">
       <?php print $messages ?>

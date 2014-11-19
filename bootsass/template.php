@@ -260,6 +260,8 @@ function bootsass_preprocess_layout_body_middle(&$variables) {
     $col_lg = 'col-lg-9';
     $variables['context_wrap_attributes']['class']['col-lg'] = 'col-lg-3';
   }
+  $variables['context_wrap_attributes']['class']['hidden-print'] = 'hidden-print';
+  
   $variables['content_wrap_attributes']['class']['col-lg'] = $col_lg;
 }
 

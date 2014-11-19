@@ -11,10 +11,10 @@
   <?php if (!empty($body_bottom)): ?>
     <?php print $body_bottom ?>
   <?php endif; ?>
-  <div id="pseudo-footer"></div>
+  <div id="pseudo-footer" class="hidden-print"></div>
 </div>
 
-<div id="footer-wrap">
+<div id="footer-wrap" class="hidden-print">
   <?php if (!empty($footer)): ?>
     <?php print $footer ?>
   <?php endif; ?>
