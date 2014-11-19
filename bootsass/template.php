@@ -103,6 +103,20 @@ function bootsass_preprocess_links(&$variables) {
       }
     }
   }
+  
+  if (!empty($variables['links'])) {
+    $links = array();
+    foreach ($variables['links'] as $key => &$link) {
+      if (!empty($link['attributes']['class'])) {
+        if (in_array('active-trail', $link['attributes']['class'])) {
+          $link['attributes']['class'][] = 'active';
+          $key .= ' active';
+        }
+      }
+      $links[$key] = $link;
+    }
+    $variables['links'] = $links;
+  }
 }
 
 /**
@@ -187,7 +201,7 @@ function bootsass_preprocess_layout_header(&$variables) {
         'header',
         'main-menu',
       ),
-      'granularity' => DRUPAL_CACHE_PER_USER,
+      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
       'expire' => time() + 24 * 60 * 60,
     ),
   );
