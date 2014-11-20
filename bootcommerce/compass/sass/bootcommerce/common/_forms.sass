@@ -54,10 +54,8 @@ form
       margin-left: 5px
 
 #commerce-checkout-form-review
-  .checkout-help
-    @extend .well
-    @extend .well-sm
-    margin-bottom: 20px
+  .checkout-help-wrapper
+    margin-bottom: 1.5em  
   .checkout-review-pane
     margin-bottom: 20px
   .checkout-review-fieldset--account
@@ -66,17 +64,7 @@ form
   .checkout-review-pane--customer-profile-shipping,
   .checkout-review-pane--customer-profile-billing
     $vertical-margin: 5px
-    .fieldset-wrapper
-      @extend .row
-    .field-name-xd-ship-to,
-    .field-name-xd-ship-to-contact,
-    .field-name-xd-ship-to-address,
-    .field-name-xd-bill-to-contact,
-    .field-name-xd-bill-to-address,
-    .field-name-xd-customer
-      @extend .col-lg-4
     .entity-xtuple-xdaddress
-      @extend address
       font-style: italic
       margin-top: $vertical-margin
     .field-type-entityreference

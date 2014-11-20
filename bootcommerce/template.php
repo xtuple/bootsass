@@ -63,6 +63,12 @@ function bootcommerce_preprocess_field(&$variables) {
       $item['#class'][] = 'img-thumbnail';
     }
   }
+
+  if ($variables['element']['#bundle'] == 'shipping'
+    || $variables['element']['#bundle'] == 'billing'
+  ) {
+    $variables['classes_array']['col-lg-4'] = 'col-lg-4';
+  }
 }
 
 /**
@@ -150,6 +156,11 @@ function bootcommerce_preprocess_entity(&$variables) {
         unset($variables['content'][$field]);
       }
     }
+  }
+
+  if ($variables['entity_type'] == 'xtuple_xdaddress') {
+    $variables['content']['#prefix'] = '<address>';
+    $variables['content']['#suffix'] = '</address>';
   }
 }
 
@@ -250,4 +261,9 @@ function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_
 
   $form['customer_profile_shipping']['xd_ship_to']['#attributes']['class']['col-lg-12'] = 'col-lg-12';
   $form['customer_profile_billing']['xd_customer']['#attributes']['class']['col-lg-12'] = 'col-lg-12';
+}
+
+function bootcommerce_form_commerce_checkout_form_review_alter(&$form, &$form_state) {
+  $form['help']['#prefix'] = '<div class="checkout-help-wrapper well well-sm">';
+  $form['help']['#suffix'] = '</div>';
 }
