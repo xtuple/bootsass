@@ -103,6 +103,20 @@ function bootsass_preprocess_links(&$variables) {
       }
     }
   }
+  
+  if (!empty($variables['links'])) {
+    $links = array();
+    foreach ($variables['links'] as $key => &$link) {
+      if (!empty($link['attributes']['class'])) {
+        if (in_array('active-trail', $link['attributes']['class'])) {
+          $link['attributes']['class'][] = 'active';
+          $key .= ' active';
+        }
+      }
+      $links[$key] = $link;
+    }
+    $variables['links'] = $links;
+  }
 }
 
 /**
@@ -187,7 +201,7 @@ function bootsass_preprocess_layout_header(&$variables) {
         'header',
         'main-menu',
       ),
-      'granularity' => DRUPAL_CACHE_PER_USER,
+      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
       'expire' => time() + 24 * 60 * 60,
     ),
   );
@@ -201,7 +215,7 @@ function bootsass_preprocess_layout_header(&$variables) {
         'header',
         'user-menu',
       ),
-      'granularity' => DRUPAL_CACHE_PER_USER,
+      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
       'expire' => time() + 24 * 60 * 60,
     ),
   );
@@ -246,6 +260,8 @@ function bootsass_preprocess_layout_body_middle(&$variables) {
     $col_lg = 'col-lg-9';
     $variables['context_wrap_attributes']['class']['col-lg'] = 'col-lg-3';
   }
+  $variables['context_wrap_attributes']['class']['hidden-print'] = 'hidden-print';
+  
   $variables['content_wrap_attributes']['class']['col-lg'] = $col_lg;
 }
 
@@ -263,12 +279,13 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_menu',
     '#name' => 'menu_main_menu',
     '#title' => variable_get('footer_main_menu_title', 'Main menu'),
+    '#title_tag' => 'h4',
     '#cache' => array(
       'keys' => array(
         'footer',
         'main-menu',
       ),
-      'granularity' => DRUPAL_CACHE_PER_USER,
+      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
       'expire' => time() + 24 * 60 * 60,
     ),
   );
@@ -277,12 +294,13 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_menu',
     '#name' => 'menu_secondary_menu',
     '#title' => variable_get('footer_secondary_menu_title', 'Secondary menu'),
+    '#title_tag' => 'h4',
     '#cache' => array(
       'keys' => array(
         'footer',
         'secondary-menu',
       ),
-      'granularity' => DRUPAL_CACHE_PER_USER,
+      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
       'expire' => time() + 24 * 60 * 60,
     ),
   );
@@ -291,12 +309,13 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_menu',
     '#name' => 'user-menu',
     '#title' => variable_get('footer_user_menu_title', 'User menu'),
+    '#title_tag' => 'h4',
     '#cache' => array(
       'keys' => array(
         'footer',
         'user-menu',
       ),
-      'granularity' => DRUPAL_CACHE_PER_USER,
+      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
       'expire' => time() + 24 * 60 * 60,
     ),
   );
@@ -305,6 +324,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_block',
     '#name' => 'contact-info',
     '#title' => variable_get('footer_contacts_title'),
+    '#title_tag' => 'h4',
     '#content' => format_text_variable_get('footer_contacts_value'),
     '#cache' => array(
       'keys' => array(
@@ -319,6 +339,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_block',
     '#name' => 'site-phone',
     '#title' => variable_get('footer_site_phone_title'),
+    '#title_tag' => 'h4',
     '#content' => variable_get('site_phone_value'),
     '#cache' => array(
       'keys' => array(
@@ -333,6 +354,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_menu',
     '#name' => 'menu-social-menu',
     '#title' => variable_get('footer_social_menu_title', 'Social menu'),
+    '#title_tag' => 'h4',
     '#cache' => array(
       'keys' => array(
         'footer',
@@ -345,6 +367,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
   $variables['copyright_array'] = array(
     '#theme' => 'block_block',
     '#name' => 'site-copyright',
+    '#title_tag' => 'h4',
     '#content' => format_text_variable_get('site_copyright'),
     '#attributes_array' => array(
       'class' => array('well b-copyright'),

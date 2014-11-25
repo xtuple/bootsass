@@ -366,6 +366,13 @@ function _bootb2b_add_to_cart_form_ajax_handler($form, $form_state) {
     global $user;
     if ($order = commerce_cart_order_load($user->uid)) {
       $cart = commerce_embed_view('ft_commerce_cart_block', 'default', array($order->order_id), 'cart');
+      
+      $cart .= '<div class="links">';
+      $cart .= '<div class="link">' . l('Checkout', 'checkout') . '</div>';
+      $cart .= '<div class="link">' . l('Cart', 'cart') . '</div>';
+      $cart .= '</div>';
+      
+      $commands[] = ajax_command_remove('.b-block-core-cart--content div.links');
       $commands[] = ajax_command_replace('.b-block-core-cart--content .view-ft-commerce-cart-block, .b-block-core-cart--content .empty-cart', $cart, array(
         'effect' => 'fade'
       ));

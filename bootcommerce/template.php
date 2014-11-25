@@ -63,6 +63,12 @@ function bootcommerce_preprocess_field(&$variables) {
       $item['#class'][] = 'img-thumbnail';
     }
   }
+
+  if ($variables['element']['#bundle'] == 'shipping'
+    || $variables['element']['#bundle'] == 'billing'
+  ) {
+    $variables['classes_array']['col-lg-4'] = 'col-lg-4';
+  }
 }
 
 /**
@@ -135,8 +141,9 @@ function bootcommerce_preprocess_entity(&$variables) {
       }
     }
 
-    if (!empty($variables['content']['xt_chars'])) {
-      $variables['characteristics'] = $variables['content']['xt_chars'];
+    if (!empty($variables['content']['xt_char'])) {
+      $variables['characteristics'] = $variables['content']['xt_char'];
+      $variables['characteristics']['#access'] = TRUE;
       unset($variables['content']['xt_chars']);
     }
 
@@ -149,6 +156,11 @@ function bootcommerce_preprocess_entity(&$variables) {
         unset($variables['content'][$field]);
       }
     }
+  }
+
+  if ($variables['entity_type'] == 'xtuple_xdaddress') {
+    $variables['content']['#prefix'] = '<address>';
+    $variables['content']['#suffix'] = '</address>';
   }
 }
 
@@ -228,4 +240,30 @@ function bootcommerce_form_alter(&$form, &$form_state, $form_id) {
       $form['quantity']['#title_display'] = 'invisible';
     }
   }
+}
+
+function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_state) {
+  $form['customer_profile_shipping']['#wrapper_attributes'] = array(
+    'class' => array(
+      'row' => 'row',
+    ),
+  );
+  $form['customer_profile_billing']['#wrapper_attributes'] = array(
+    'class' => array(
+      'row' => 'row',
+    ),
+  );
+  $form['customer_profile_shipping']['xd_ship_to_address']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
+  $form['customer_profile_shipping']['xd_ship_to_contact']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
+
+  $form['customer_profile_billing']['xd_bill_to_address']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
+  $form['customer_profile_billing']['xd_bill_to_contact']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
+
+  $form['customer_profile_shipping']['xd_ship_to']['#attributes']['class']['col-lg-12'] = 'col-lg-12';
+  $form['customer_profile_billing']['xd_customer']['#attributes']['class']['col-lg-12'] = 'col-lg-12';
+}
+
+function bootcommerce_form_commerce_checkout_form_review_alter(&$form, &$form_state) {
+  $form['help']['#prefix'] = '<div class="checkout-help-wrapper well well-sm">';
+  $form['help']['#suffix'] = '</div>';
 }

@@ -9,8 +9,6 @@ form
 #views-form-ft-commerce-cart-form-default,
 .view-ft-commerce-cart-summary
   .views-table
-    @extend table
-    @extend .table
     tbody
       & > tr
         & > td
@@ -41,18 +39,6 @@ form
     font-size: $font-size-large
   .redirect-list
     display: none
-  .customer_profile_shipping,
-  .customer_profile_billing
-    & > div.fieldset-wrapper
-      @extend .row
-      .field-name-xd-ship-to,
-      .field-name-xd-customer
-        @extend .col-lg-12
-      & > fieldset.form-wrapper
-        @extend .col-lg-6
-      & > div.field-type-entityreference
-        fieldset.form-wrapper
-          @extend .col-lg-6
 
 #commerce-checkout-form-shipping,
 #commerce-checkout-form-review
@@ -68,10 +54,8 @@ form
       margin-left: 5px
 
 #commerce-checkout-form-review
-  .checkout-help
-    @extend .well
-    @extend .well-sm
-    margin-bottom: 20px
+  .checkout-help-wrapper
+    margin-bottom: 1.5em  
   .checkout-review-pane
     margin-bottom: 20px
   .checkout-review-fieldset--account
@@ -80,17 +64,7 @@ form
   .checkout-review-pane--customer-profile-shipping,
   .checkout-review-pane--customer-profile-billing
     $vertical-margin: 5px
-    .fieldset-wrapper
-      @extend .row
-    .field-name-xd-ship-to,
-    .field-name-xd-ship-to-contact,
-    .field-name-xd-ship-to-address,
-    .field-name-xd-bill-to-contact,
-    .field-name-xd-bill-to-address,
-    .field-name-xd-customer
-      @extend .col-lg-4
     .entity-xtuple-xdaddress
-      @extend address
       font-style: italic
       margin-top: $vertical-margin
     .field-type-entityreference

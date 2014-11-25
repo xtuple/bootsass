@@ -36,7 +36,6 @@
 
   <?php if (!empty($characteristics)): ?>
     <div<?php print $characteristics_attributes ?>>
-      <h4><?php print $characteristics_title ?></h4>
       <?php print render($characteristics); ?>
     </div>
   <?php endif; ?>

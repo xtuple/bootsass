@@ -1,7 +1,7 @@
 <div class="view-ft-commerce-xd-products">
   <div class="view-content">
     <?php if (!empty($products)): ?>
-      <table class="views-table col-3">
+      <table class="views-table col-3 table table-striped">
         <thead>
           <tr>
             <th class="views-field views-field-sku"><?php print t('Item #') ?></th>
