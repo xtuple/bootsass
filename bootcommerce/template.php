@@ -96,11 +96,11 @@ function bootcommerce_preprocess_entity(&$variables) {
       $variables['content']['product_price']['#weight'] = -11;
       $markup = '';
       $markup .= '<div class="field-label">' . t('Price') . ':&nbsp;</div>';
-      $unit = $variables['content']['inventoryUnit']['#items'][0]['value'];
-      $units = entity_load('xtuple_unit');
+      $unit_key = $variables['content']['inventoryUnit']['#items'][0]['value'];
+      $unit = entity_load_single('xtuple_unit', $unit_key);
 
       $markup .= '<div class="field-item"><span>' . $variables['content']['product_price']['#markup'] .
-        '</span><small> / ' . $units[$unit]->description . '</small>' . '</div>';
+        '</span><small> / ' . $unit->description . '</small>' . '</div>';
       $variables['content']['product_price']['#markup'] = $markup;
     }
 
