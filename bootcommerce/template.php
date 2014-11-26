@@ -69,6 +69,11 @@ function bootcommerce_preprocess_field(&$variables) {
   ) {
     $variables['classes_array']['col-lg-4'] = 'col-lg-4';
   }
+  
+  if ($variables['element']['#bundle'] == 'xtuple_xdshipto'
+    && $variables['element']['#field_type'] == 'entityreference') {
+    $variables['classes_array']['col-lg-4'] = 'col-lg-4';
+  }
 }
 
 /**
