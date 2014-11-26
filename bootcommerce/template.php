@@ -107,7 +107,6 @@ function bootcommerce_preprocess_entity(&$variables) {
       $markup = '';
       $markup .= '<div class="field-label">' . t('Price') . ':&nbsp;</div>';
       $unit_key = $variables['content']['inventoryUnit']['#items'][0]['value'];
-      $unit = entity_load_single('xtuple_unit', $unit_key);
       $units = xdruple_fields_get_uom_list();
       $unit = $units[$unit_key];
       $variables['unit'] = $unit;
