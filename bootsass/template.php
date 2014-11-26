@@ -103,7 +103,7 @@ function bootsass_preprocess_links(&$variables) {
       }
     }
   }
-  
+
   if (!empty($variables['links'])) {
     $links = array();
     foreach ($variables['links'] as $key => &$link) {
@@ -261,7 +261,7 @@ function bootsass_preprocess_layout_body_middle(&$variables) {
     $variables['context_wrap_attributes']['class']['col-lg'] = 'col-lg-3';
   }
   $variables['context_wrap_attributes']['class']['hidden-print'] = 'hidden-print';
-  
+
   $variables['content_wrap_attributes']['class']['col-lg'] = $col_lg;
 }
 
