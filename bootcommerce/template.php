@@ -78,7 +78,7 @@ function bootcommerce_preprocess_entity(&$variables) {
   $variables['content_attributes_array'] = array();
   $variables['bottom_attributes_array'] = array();
   $variables['characteristics_attributes_array'] = array();
-  
+
   if ($variables['view_mode'] == 'full'
     && $variables['entity_type'] == 'commerce_product'
   ) {
@@ -107,8 +107,9 @@ function bootcommerce_preprocess_entity(&$variables) {
       $markup = '';
       $markup .= '<div class="field-label">' . t('Price') . ':&nbsp;</div>';
       $unit_key = $variables['content']['inventoryUnit']['#items'][0]['value'];
-      $unit = entity_load_single('xtuple_unit', $unit_key);
-      $variables['unit'] = $unit->description;
+      $units = xdruple_fields_get_uom_list();
+      $unit = $units[$unit_key];
+      $variables['unit'] = $unit;
       $markup .= '<div class="field-item"><span>' . $variables['content']['product_price']['#markup'] .
         '</span><small> / ' . $variables['unit'] . '</small>' . '</div>';
       $variables['content']['product_price']['#markup'] = $markup;
