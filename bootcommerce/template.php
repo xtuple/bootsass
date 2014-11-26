@@ -75,6 +75,10 @@ function bootcommerce_preprocess_field(&$variables) {
  * @see template_preprocess_entity()
  */
 function bootcommerce_preprocess_entity(&$variables) {
+  $variables['content_attributes_array'] = array();
+  $variables['bottom_attributes_array'] = array();
+  $variables['characteristics_attributes_array'] = array();
+  
   if ($variables['view_mode'] == 'full'
     && $variables['entity_type'] == 'commerce_product'
   ) {
@@ -188,11 +192,9 @@ function bootcommerce_form_xdruple_favorites_remove_from_favorites_form_alter(&$
  * @see template_process_entity()
  */
 function bootcommerce_process_entity(&$variables) {
-  if ($variables['view_mode'] == 'full' && $variables['entity_type'] == 'commerce_product') {
-    $variables['context_attributes'] = drupal_attributes($variables['context_attributes_array']);
-    $variables['bottom_attributes'] = drupal_attributes($variables['bottom_attributes_array']);
-    $variables['characteristics_attributes'] = drupal_attributes($variables['characteristics_attributes_array']);
-  }
+  $variables['context_attributes'] = drupal_attributes($variables['context_attributes_array']);
+  $variables['bottom_attributes'] = drupal_attributes($variables['bottom_attributes_array']);
+  $variables['characteristics_attributes'] = drupal_attributes($variables['characteristics_attributes_array']);
 }
 
 /**
