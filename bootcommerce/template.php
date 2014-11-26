@@ -104,9 +104,9 @@ function bootcommerce_preprocess_entity(&$variables) {
       $markup .= '<div class="field-label">' . t('Price') . ':&nbsp;</div>';
       $unit_key = $variables['content']['inventoryUnit']['#items'][0]['value'];
       $unit = entity_load_single('xtuple_unit', $unit_key);
-
+      $variables['unit'] = $unit->description;
       $markup .= '<div class="field-item"><span>' . $variables['content']['product_price']['#markup'] .
-        '</span><small> / ' . $unit->description . '</small>' . '</div>';
+        '</span><small> / ' . $variables['unit'] . '</small>' . '</div>';
       $variables['content']['product_price']['#markup'] = $markup;
     }
 
