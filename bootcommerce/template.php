@@ -259,6 +259,13 @@ function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_
   $form['customer_profile_shipping']['xd_ship_to_address']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
   $form['customer_profile_shipping']['xd_ship_to_contact']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
 
+  if (!empty($form['customer_profile_shipping']['ship_to_contact_wrapper'])) {
+    $form['customer_profile_shipping']['ship_to_contact_wrapper']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
+  }
+  if (!empty($form['customer_profile_shipping']['ship_to_address_wrapper'])) {
+    $form['customer_profile_shipping']['ship_to_address_wrapper']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
+  }
+
   $form['customer_profile_billing']['xd_bill_to_address']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
   $form['customer_profile_billing']['xd_bill_to_contact']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
 
