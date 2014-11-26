@@ -75,7 +75,7 @@ function bootcommerce_preprocess_field(&$variables) {
  * @see template_preprocess_entity()
  */
 function bootcommerce_preprocess_entity(&$variables) {
-  $variables['content_attributes_array'] = array();
+  $variables['context_attributes_array'] = array();
   $variables['bottom_attributes_array'] = array();
   $variables['characteristics_attributes_array'] = array();
 
