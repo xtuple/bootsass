@@ -69,7 +69,7 @@ function bootcommerce_preprocess_field(&$variables) {
   ) {
     $variables['classes_array']['col-lg-4'] = 'col-lg-4';
   }
-  
+
   if ($variables['element']['#bundle'] == 'xtuple_xdshipto'
     && $variables['element']['#field_type'] == 'entityreference') {
     $variables['classes_array']['col-lg-4'] = 'col-lg-4';
@@ -261,8 +261,12 @@ function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_
       'row' => 'row',
     ),
   );
-  $form['customer_profile_shipping']['xd_ship_to_address']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
-  $form['customer_profile_shipping']['xd_ship_to_contact']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
+  if (!empty($form['customer_profile_shipping']['xd_ship_to_address'])) {
+    $form['customer_profile_shipping']['xd_ship_to_address']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
+  }
+  if (!empty($form['customer_profile_shipping']['xd_ship_to_contact'])) {
+    $form['customer_profile_shipping']['xd_ship_to_contact']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
+  }
 
   if (!empty($form['customer_profile_shipping']['ship_to_contact_wrapper'])) {
     $form['customer_profile_shipping']['ship_to_contact_wrapper']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
