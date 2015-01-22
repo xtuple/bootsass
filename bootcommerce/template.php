@@ -250,7 +250,22 @@ function bootcommerce_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter() for commerce_checkout_form_checkout
+ * 
+ * @param $form
+ * @param $form_state
+ */
 function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_state) {
+  if (!empty($form['buttons']['cancel']['#attributes']['class'])) {
+    foreach ($form['buttons']['cancel']['#attributes']['class'] as $i => $value) {
+      if ($value == 'checkout-cancel') {
+        unset($form['buttons']['cancel']['#attributes']['class'][$i]);
+      }
+    }
+  }
+  $form['buttons']['cancel']['#attributes']['class']['btn-danger'] = 'btn-danger';
+  
   $form['customer_profile_shipping']['#wrapper_attributes'] = array(
     'class' => array(
       'row' => 'row',
@@ -282,7 +297,39 @@ function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_
   $form['customer_profile_billing']['xd_customer']['#attributes']['class']['col-lg-12'] = 'col-lg-12';
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter() for commerce_checkout_form_review
+ * 
+ * @param $form
+ * @param $form_state
+ */
 function bootcommerce_form_commerce_checkout_form_review_alter(&$form, &$form_state) {
   $form['help']['#prefix'] = '<div class="checkout-help-wrapper well well-sm">';
   $form['help']['#suffix'] = '</div>';
+
+  if (!empty($form['buttons']['back']['#attributes']['class'])) {
+    foreach ($form['buttons']['back']['#attributes']['class'] as $i => $value) {
+      if ($value == 'checkout-back') {
+        unset($form['buttons']['back']['#attributes']['class'][$i]);
+      }
+    }
+  }
+  $form['buttons']['back']['#attributes']['class']['btn-danger'] = 'btn-danger';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for commerce_checkout_form_shipping
+ *
+ * @param $form
+ * @param $form_state
+ */
+function bootcommerce_form_commerce_checkout_form_shipping_alter(&$form, $form_state) {
+  if (!empty($form['buttons']['back']['#attributes']['class'])) {
+    foreach ($form['buttons']['back']['#attributes']['class'] as $i => $value) {
+      if ($value == 'checkout-back') {
+        unset($form['buttons']['back']['#attributes']['class'][$i]);
+      }
+    }
+  }
+  $form['buttons']['back']['#attributes']['class']['btn-danger'] = 'btn-danger';
 }
