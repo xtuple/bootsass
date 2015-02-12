@@ -368,7 +368,7 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_block',
     '#name' => 'site-copyright',
     '#title_tag' => 'h4',
-    '#content' => format_text_variable_get('site_copyright'),
+    '#content' => format_text_variable_get('footer_message'),
     '#attributes_array' => array(
       'class' => array('well b-copyright'),
     ),
