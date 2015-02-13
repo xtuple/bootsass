@@ -181,13 +181,6 @@ function bootsass_preprocess_layout_header(&$variables) {
     '#name' => 'site-phone',
     '#title' => variable_get('header_site_phone_title'),
     '#content' => variable_get('site_phone_value'),
-    '#cache' => array(
-      'keys' => array(
-        'header',
-        'site-phone-block',
-      ),
-      'expire' => time() + 24 * 60 * 60,
-    ),
   );
 
   $variables['logo'] = '<div class="b-logo">' . l('Logo', '<front>') . '</div>';
@@ -196,28 +189,12 @@ function bootsass_preprocess_layout_header(&$variables) {
     '#theme' => 'block_menu',
     '#name' => 'menu_main_menu',
     '#context' => 'header',
-    '#cache' => array(
-      'keys' => array(
-        'header',
-        'main-menu',
-      ),
-      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
-      'expire' => time() + 24 * 60 * 60,
-    ),
   );
 
   $variables['user_menu_array'] = array(
     '#theme' => 'block_menu',
     '#name' => 'user-menu',
     '#context' => 'header',
-    '#cache' => array(
-      'keys' => array(
-        'header',
-        'user-menu',
-      ),
-      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
-      'expire' => time() + 24 * 60 * 60,
-    ),
   );
 }
 
@@ -280,14 +257,6 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#name' => 'menu_main_menu',
     '#title' => variable_get('footer_main_menu_title', 'Main menu'),
     '#title_tag' => 'h4',
-    '#cache' => array(
-      'keys' => array(
-        'footer',
-        'main-menu',
-      ),
-      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
-      'expire' => time() + 24 * 60 * 60,
-    ),
   );
 
   $variables['secondary_menu_array'] = array(
@@ -295,14 +264,6 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#name' => 'menu_secondary_menu',
     '#title' => variable_get('footer_secondary_menu_title', 'Secondary menu'),
     '#title_tag' => 'h4',
-    '#cache' => array(
-      'keys' => array(
-        'footer',
-        'secondary-menu',
-      ),
-      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
-      'expire' => time() + 24 * 60 * 60,
-    ),
   );
 
   $variables['user_menu_array'] = array(
@@ -310,14 +271,6 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#name' => 'user-menu',
     '#title' => variable_get('footer_user_menu_title', 'User menu'),
     '#title_tag' => 'h4',
-    '#cache' => array(
-      'keys' => array(
-        'footer',
-        'user-menu',
-      ),
-      'granularity' => DRUPAL_CACHE_PER_PAGE | DRUPAL_CACHE_PER_USER,
-      'expire' => time() + 24 * 60 * 60,
-    ),
   );
 
   $variables['contact_info_array'] = array(
@@ -326,13 +279,6 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#title' => variable_get('footer_contacts_title'),
     '#title_tag' => 'h4',
     '#content' => format_text_variable_get('footer_contacts_value'),
-    '#cache' => array(
-      'keys' => array(
-        'footer',
-        'contact-info',
-      ),
-      'expire' => time() + 24 * 60 * 60,
-    ),
   );
 
   $variables['site_phone_array'] = array(
@@ -341,13 +287,6 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#title' => variable_get('footer_site_phone_title'),
     '#title_tag' => 'h4',
     '#content' => variable_get('site_phone_value'),
-    '#cache' => array(
-      'keys' => array(
-        'footer',
-        'site-phone',
-      ),
-      'expire' => time() + 24 * 60 * 60,
-    ),
   );
 
   $variables['social_menu_array'] = array(
@@ -355,13 +294,6 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#name' => 'menu-social-menu',
     '#title' => variable_get('footer_social_menu_title', 'Social menu'),
     '#title_tag' => 'h4',
-    '#cache' => array(
-      'keys' => array(
-        'footer',
-        'social-menu',
-      ),
-      'expire' => time() + 24 * 60 * 60,
-    ),
   );
 
   $variables['copyright_array'] = array(
@@ -371,13 +303,6 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#content' => format_text_variable_get('footer_message'),
     '#attributes_array' => array(
       'class' => array('well b-copyright'),
-    ),
-    '#cache' => array(
-      'keys' => array(
-        'footer',
-        'copyright',
-      ),
-      'expire' => time() + 24 * 60 * 60,
     ),
   );
 }
