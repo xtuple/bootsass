@@ -266,35 +266,28 @@ function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_
   }
   $form['buttons']['cancel']['#attributes']['class']['btn-danger'] = 'btn-danger';
   
-  $form['customer_profile_shipping']['#wrapper_attributes'] = array(
+  $form['shipping_billing_wrapper'] = array(
+    '#type' => 'container',
+    '#attributes' => array(
+      'class' => array(
+        'row' => 'row'
+      )
+    )
+  );
+  $form['customer_profile_shipping']['#attributes'] = array(
     'class' => array(
-      'row' => 'row',
+      'col-lg-6' => 'col-lg-6',
     ),
   );
-  $form['customer_profile_billing']['#wrapper_attributes'] = array(
+  $form['customer_profile_billing']['#attributes'] = array(
     'class' => array(
-      'row' => 'row',
+      'col-lg-6' => 'col-lg-6',
     ),
   );
-  if (!empty($form['customer_profile_shipping']['xd_ship_to_address'])) {
-    $form['customer_profile_shipping']['xd_ship_to_address']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
-  }
-  if (!empty($form['customer_profile_shipping']['xd_ship_to_contact'])) {
-    $form['customer_profile_shipping']['xd_ship_to_contact']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
-  }
-
-  if (!empty($form['customer_profile_shipping']['ship_to_contact_wrapper'])) {
-    $form['customer_profile_shipping']['ship_to_contact_wrapper']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
-  }
-  if (!empty($form['customer_profile_shipping']['ship_to_address_wrapper'])) {
-    $form['customer_profile_shipping']['ship_to_address_wrapper']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
-  }
-
-  $form['customer_profile_billing']['xd_bill_to_address']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
-  $form['customer_profile_billing']['xd_bill_to_contact']['#attributes']['class']['col-lg-6'] = 'col-lg-6';
-
-  $form['customer_profile_shipping']['xd_ship_to']['#attributes']['class']['col-lg-12'] = 'col-lg-12';
-  $form['customer_profile_billing']['xd_customer']['#attributes']['class']['col-lg-12'] = 'col-lg-12';
+  $form['shipping_billing_wrapper']['customer_profile_shipping'] = $form['customer_profile_shipping'];
+  $form['shipping_billing_wrapper']['customer_profile_billing'] = $form['customer_profile_billing'];
+  unset($form['customer_profile_shipping']);
+  unset($form['customer_profile_billing']);
 }
 
 /**
