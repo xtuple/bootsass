@@ -266,14 +266,6 @@ function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_
   }
   $form['buttons']['cancel']['#attributes']['class']['btn-danger'] = 'btn-danger';
   
-  $form['shipping_billing_wrapper'] = array(
-    '#type' => 'container',
-    '#attributes' => array(
-      'class' => array(
-        'row' => 'row'
-      )
-    )
-  );
   $form['customer_profile_shipping']['#attributes'] = array(
     'class' => array(
       'col-lg-6' => 'col-lg-6',
@@ -284,10 +276,6 @@ function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_
       'col-lg-6' => 'col-lg-6',
     ),
   );
-  $form['shipping_billing_wrapper']['customer_profile_shipping'] = $form['customer_profile_shipping'];
-  $form['shipping_billing_wrapper']['customer_profile_billing'] = $form['customer_profile_billing'];
-  unset($form['customer_profile_shipping']);
-  unset($form['customer_profile_billing']);
 }
 
 /**
