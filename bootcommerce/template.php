@@ -71,7 +71,8 @@ function bootcommerce_preprocess_field(&$variables) {
   }
 
   if ($variables['element']['#bundle'] == 'xtuple_xdshipto'
-    && $variables['element']['#field_type'] == 'entityreference') {
+    && $variables['element']['#field_type'] == 'entityreference'
+  ) {
     $variables['classes_array']['col-lg-4'] = 'col-lg-4';
   }
 }
@@ -252,7 +253,7 @@ function bootcommerce_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * Implements hook_form_FORM_ID_alter() for commerce_checkout_form_checkout
- * 
+ *
  * @param $form
  * @param $form_state
  */
@@ -265,22 +266,21 @@ function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_
     }
   }
   $form['buttons']['cancel']['#attributes']['class']['btn-danger'] = 'btn-danger';
+
+  /** @see preprocess_xdruple_contact_field */
+  $form["customer_profile_shipping"]["xd_contact"]["#attributes"]["class"]["row"] = "row";
+  $form["customer_profile_shipping"]["xd_contact"]["#variables"]["contact_attributes_array"]["class"]["col-lg-6"] = "col-lg-6";
+  $form["customer_profile_shipping"]["xd_contact"]["#variables"]["address_attributes_array"]["class"]["col-lg-6"] = "col-lg-6";
   
-  $form['customer_profile_shipping']['#attributes'] = array(
-    'class' => array(
-      'col-lg-6' => 'col-lg-6',
-    ),
-  );
-  $form['customer_profile_billing']['#attributes'] = array(
-    'class' => array(
-      'col-lg-6' => 'col-lg-6',
-    ),
-  );
+  /** @see preprocess_xdruple_contact_field */
+  $form["customer_profile_billing"]["xd_contact"]["#attributes"]["class"]["row"] = "row";
+  $form["customer_profile_billing"]["xd_contact"]["#variables"]["contact_attributes_array"]["class"]["col-lg-6"] = "col-lg-6";
+  $form["customer_profile_billing"]["xd_contact"]["#variables"]["address_attributes_array"]["class"]["col-lg-6"] = "col-lg-6";
 }
 
 /**
  * Implements hook_form_FORM_ID_alter() for commerce_checkout_form_review
- * 
+ *
  * @param $form
  * @param $form_state
  */
