@@ -267,15 +267,23 @@ function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_
   }
   $form['buttons']['cancel']['#attributes']['class']['btn-danger'] = 'btn-danger';
 
-  /** @see preprocess_xdruple_contact_field */
-  $form["customer_profile_shipping"]["xd_contact"]["#attributes"]["class"]["row"] = "row";
-  $form["customer_profile_shipping"]["xd_contact"]["#variables"]["contact_attributes_array"]["class"]["col-lg-6"] = "col-lg-6";
-  $form["customer_profile_shipping"]["xd_contact"]["#variables"]["address_attributes_array"]["class"]["col-lg-6"] = "col-lg-6";
-  
-  /** @see preprocess_xdruple_contact_field */
-  $form["customer_profile_billing"]["xd_contact"]["#attributes"]["class"]["row"] = "row";
-  $form["customer_profile_billing"]["xd_contact"]["#variables"]["contact_attributes_array"]["class"]["col-lg-6"] = "col-lg-6";
-  $form["customer_profile_billing"]["xd_contact"]["#variables"]["address_attributes_array"]["class"]["col-lg-6"] = "col-lg-6";
+  foreach (array("customer_profile_shipping", "customer_profile_billing") as $profile_type) {
+    if (!empty($form[$profile_type]["xd_contact"])) {
+      /** @see preprocess_xdruple_contact_form_element */
+      $xd_contact = &$form[$profile_type]["xd_contact"];
+      $xd_contact["#attributes"]["class"]["row"] = "row";
+      $language = LANGUAGE_NONE;
+      if (!empty($xd_contact["#language"])) {
+        $language = $xd_contact["#language"];
+      }
+      if (!empty($xd_contact[$language])) {
+        foreach (element_children($xd_contact[$language]) as $delta) {
+          $xd_contact[$language][$delta]["value"]["#variables"]["contact_attributes_array"]["class"]["col-lg-6"] = "col-lg-6";
+          $xd_contact[$language][$delta]["value"]["#variables"]["address_attributes_array"]["class"]["col-lg-6"] = "col-lg-6";
+        }
+      }
+    }
+  }
 }
 
 /**
