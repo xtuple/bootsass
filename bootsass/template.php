@@ -40,6 +40,10 @@ function bootsass_theme() {
 
 /**
  * Preprocess function for page.tpl.php
+ *
+ * @param $variables
+ *
+ * @throws \Exception
  */
 function bootsass_preprocess_page(&$variables) {
   $variables['header'] = theme('layout_header');
@@ -131,6 +135,8 @@ function bootsass_date_all_day_label() {
 
 /**
  * @see template_preprocess_field()
+ *
+ * @param $variables
  */
 function bootsass_preprocess_field(&$variables) {
   if (!empty($variables['element']['#field_type'])
@@ -156,6 +162,8 @@ function bootsass_preprocess_field(&$variables) {
 
 /**
  * @see template_process_field()
+ *
+ * @param $variables
  */
 function bootsass_process_field(&$variables) {
   $variables['group_attributes'] = drupal_attributes($variables['group_attributes_array']);
@@ -163,6 +171,8 @@ function bootsass_process_field(&$variables) {
 
 /**
  * @see template_preprocess_views_view_field()
+ *
+ * @param $variables
  */
 function bootsass_preprocess_views_view_field(&$variables) {
   if (!empty($variables['field']->field_info['type'])
@@ -174,13 +184,15 @@ function bootsass_preprocess_views_view_field(&$variables) {
 
 /**
  * Preprocess function for layout-header.tpl.php
+ *
+ * @param $variables
  */
 function bootsass_preprocess_layout_header(&$variables) {
   $variables['site_phone_array'] = array(
     '#theme' => 'block_block',
     '#name' => 'site-phone',
-    '#title' => variable_get('header_site_phone_title'),
-    '#content' => variable_get('site_phone_value'),
+    '#title' => variable_get('header_site_phone_title', 'Call us:'),
+    '#content' => variable_get('site_phone_value', "(800) 555-1234"),
   );
 
   $variables['logo'] = '<div class="b-logo">' . l('Logo', '<front>') . '</div>';
@@ -211,6 +223,10 @@ function bootsass_process_layout_header(&$variables) {
 
 /**
  * Preprocess function for layout-body-top.tpl.php
+ *
+ * @param $variables
+ *
+ * @throws \Exception
  */
 function bootsass_preprocess_layout_body_top(&$variables) {
   $variables['messages'] = theme('status_messages');
@@ -221,6 +237,8 @@ function bootsass_preprocess_layout_body_top(&$variables) {
 
 /**
  * Preprocess function for layout-body-middle.tpl.php
+ *
+ * @param $variables
  */
 function bootsass_preprocess_layout_body_middle(&$variables) {
   if (!empty($variables['content_middle']['#theme_wrappers'])) {
@@ -244,12 +262,16 @@ function bootsass_preprocess_layout_body_middle(&$variables) {
 
 /**
  * Preprocess function for layout-body-bottom.tpl.php
+ *
+ * @param $variables
  */
 function bootsass_preprocess_layout_body_bottom(&$variables) {
 }
 
 /**
  * Preprocess function for layout-footer.tpl.php
+ *
+ * @param $variables
  */
 function bootsass_preprocess_layout_footer(&$variables) {
   $variables['main_menu_array'] = array(
@@ -276,15 +298,18 @@ function bootsass_preprocess_layout_footer(&$variables) {
   $variables['contact_info_array'] = array(
     '#theme' => 'block_block',
     '#name' => 'contact-info',
-    '#title' => variable_get('footer_contacts_title'),
+    '#title' => variable_get('footer_contacts_title', 'Contact information'),
     '#title_tag' => 'h4',
-    '#content' => format_text_variable_get('footer_contacts_value'),
+    '#content' => format_text_variable_get('footer_contacts_value', array(
+      'value' => 'Site built by xTuple.',
+      'format' => 'htmlpurifier_basic',
+    )),
   );
 
   $variables['site_phone_array'] = array(
     '#theme' => 'block_block',
     '#name' => 'site-phone',
-    '#title' => variable_get('footer_site_phone_title'),
+    '#title' => variable_get('footer_site_phone_title', 'Call us now toll free:'),
     '#title_tag' => 'h4',
     '#content' => variable_get('site_phone_value'),
   );
@@ -300,7 +325,10 @@ function bootsass_preprocess_layout_footer(&$variables) {
     '#theme' => 'block_block',
     '#name' => 'site-copyright',
     '#title_tag' => 'h4',
-    '#content' => format_text_variable_get('footer_message'),
+    '#content' => format_text_variable_get('footer_message', array(
+      'value' => '<p>© ' . date('Y') . ', ' . variable_get('site_name') . '</p>',
+      'format' => 'htmlpurifier_basic',
+    )),
     '#attributes_array' => array(
       'class' => array('well b-copyright'),
     ),
@@ -325,6 +353,10 @@ function bootsass_process_layout_footer(&$variables) {
 
 /**
  * Preprocess function for layout-content-top.tpl.php
+ *
+ * @param $variables
+ *
+ * @throws \Exception
  */
 function bootsass_preprocess_layout_content_top(&$variables) {
   $variables['tabs'] = theme('menu_local_tasks', array(
@@ -338,6 +370,8 @@ function bootsass_preprocess_layout_content_top(&$variables) {
 
 /**
  * Preprocess function for layout-content-bottom.tpl.php
+ *
+ * @param $variables
  */
 function bootsass_preprocess_layout_content_bottom(&$variables) {
 
@@ -345,6 +379,8 @@ function bootsass_preprocess_layout_content_bottom(&$variables) {
 
 /**
  * Preprocess function for layout-content-context.tpl.php
+ *
+ * @param $variables
  */
 function bootsass_preprocess_layout_content_context(&$variables) {
   $blocks = array();
