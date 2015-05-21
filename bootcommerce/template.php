@@ -168,11 +168,6 @@ function bootcommerce_preprocess_entity(&$variables) {
       }
     }
   }
-
-  if ($variables['entity_type'] == 'xtuple_xdaddress') {
-    $variables['content']['#prefix'] = '<address>';
-    $variables['content']['#suffix'] = '</address>';
-  }
 }
 
 /**
