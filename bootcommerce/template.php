@@ -299,6 +299,28 @@ function bootcommerce_form_commerce_checkout_form_review_alter(&$form, &$form_st
     }
   }
   $form['buttons']['back']['#attributes']['class']['btn-danger'] = 'btn-danger';
+
+  $form["commerce_payment"]["payment_details"]["credit_card"]["exp_month"]["#type"] = "textfield";
+  $form["commerce_payment"]["payment_details"]["credit_card"]["exp_month"]["#maxlength"] = 2;
+
+  $form["commerce_payment"]["payment_details"]["credit_card"]["exp_year"]["#type"] = "textfield";
+  $form["commerce_payment"]["payment_details"]["credit_card"]["exp_year"]["#maxlength"] = 2;
+  unset($form["commerce_payment"]["payment_details"]["credit_card"]["exp_year"]["#options"]);
+  $form["commerce_payment"]["payment_details"]["credit_card"]["exp_year"]["#default_value"] = date("y");
+  $form["commerce_payment"]["payment_details"]["credit_card"]["exp_year"]["#field_prefix"] = substr(date("Y"), 0, 2);
+
+  array_unshift($form["buttons"]["continue"]["#validate"], "_bootcommerce_form_commerce_checkout_form_review_alter_validate");
+}
+
+/**
+ * Helper function for bootcommerce_form_commerce_checkout_form_review_alter()
+ * 
+ * @param $form
+ * @param $form_state
+ */
+function _bootcommerce_form_commerce_checkout_form_review_alter_validate(&$form, &$form_state) {
+  $year = substr(date('Y'), 0, 2) . $form_state["values"]["commerce_payment"]["payment_details"]["credit_card"]["exp_year"];
+  $form_state["values"]["commerce_payment"]["payment_details"]["credit_card"]["exp_year"] = $year;
 }
 
 /**
