@@ -4,6 +4,17 @@
  * @file keeps theme functions overrides
  */
 
+function bootcommerce_theme() {
+  $items = [];
+  $templates = drupal_get_path("theme", "bootcommerce") . "/templates";
+  $items["bootcommerce_commerce_payment_credit_cart"] = [
+    "render element" => "element",
+    "template" => "bootcommerce-commerce-payment-credit-card",
+    "path" => "$templates/commerce_payment",
+  ];
+  return $items;
+}
+
 function bootcommerce_preprocess_layout_header(&$variables) {
   $variables['search_box'] = theme('block_form', array(
     'name' => 'xdruple_search_search_form',
@@ -300,27 +311,54 @@ function bootcommerce_form_commerce_checkout_form_review_alter(&$form, &$form_st
   }
   $form['buttons']['back']['#attributes']['class']['btn-danger'] = 'btn-danger';
 
-  $form["commerce_payment"]["payment_details"]["credit_card"]["exp_month"]["#type"] = "textfield";
-  $form["commerce_payment"]["payment_details"]["credit_card"]["exp_month"]["#maxlength"] = 2;
-
-  $form["commerce_payment"]["payment_details"]["credit_card"]["exp_year"]["#type"] = "textfield";
-  $form["commerce_payment"]["payment_details"]["credit_card"]["exp_year"]["#maxlength"] = 2;
-  unset($form["commerce_payment"]["payment_details"]["credit_card"]["exp_year"]["#options"]);
-  $form["commerce_payment"]["payment_details"]["credit_card"]["exp_year"]["#default_value"] = date("y");
-  $form["commerce_payment"]["payment_details"]["credit_card"]["exp_year"]["#field_prefix"] = substr(date("Y"), 0, 2);
-
-  array_unshift($form["buttons"]["continue"]["#validate"], "_bootcommerce_form_commerce_checkout_form_review_alter_validate");
+  if (!empty($form["commerce_payment"]["payment_details"]["credit_card"])) {
+    $credit_card = &$form["commerce_payment"]["payment_details"]["credit_card"];
+    $credit_card["#theme"] = "bootcommerce_commerce_payment_credit_cart";
+    $credit_card["#element_validate"] = [
+      "bootcommerce_commerce_payment_credit_cart_validate",
+    ];
+    unset($credit_card["#attached"]["css"]);
+    $credit_card["type"]["#type"] = "radios";
+    $credit_card["type"]["#title"] = "";
+    $credit_card["exp_month"]["#type"] = "textfield";
+    $credit_card["exp_month"]["#title"] = t("Month");
+    $credit_card["exp_month"]["#default_value"] = "";
+    $credit_card["exp_month"]["#maxlength"] = 2;
+    $credit_card["exp_month"]["#size"] = 1;
+    $credit_card["exp_month"]["#attributes"]["placeholder"] = "MM";
+    unset($credit_card["exp_month"]["#prefix"]);
+    unset($credit_card["exp_month"]["#suffix"]);
+    $credit_card["exp_year"]["#type"] = "textfield";
+    $credit_card["exp_year"]["#title"] = t("Year");
+    $credit_card["exp_year"]["#default_value"] = "";
+    $credit_card["exp_year"]["#required"] = TRUE;
+    $credit_card["exp_year"]["#maxlength"] = 2;
+    $credit_card["exp_year"]["#size"] = 1;
+    $credit_card["exp_year"]["#field_prefix"] = substr(date("Y"), 0, 2);
+    $credit_card["exp_year"]["#attributes"]["placeholder"] = "YY";
+    $credit_card["code"]["#title"] = "CVV/CSC";
+    $credit_card["code"]["#size"] = 1;
+    unset($credit_card["exp_year"]["#prefix"]);
+    unset($credit_card["exp_year"]["#suffix"]);
+    unset($credit_card["exp_year"]["#options"]);
+  }
 }
 
 /**
  * Helper function for bootcommerce_form_commerce_checkout_form_review_alter()
- * 
- * @param $form
+ *
+ * @param $element
  * @param $form_state
+ * @param $form
  */
-function _bootcommerce_form_commerce_checkout_form_review_alter_validate(&$form, &$form_state) {
-  $year = substr(date('Y'), 0, 2) . $form_state["values"]["commerce_payment"]["payment_details"]["credit_card"]["exp_year"];
-  $form_state["values"]["commerce_payment"]["payment_details"]["credit_card"]["exp_year"] = $year;
+function bootcommerce_commerce_payment_credit_cart_validate($element, &$form_state, $form) {
+  $input = drupal_array_get_nested_value($form_state["values"], $element["#parents"]);
+  $input["exp_year"] = substr(date('Y'), 0, 2) . $input["exp_year"];
+  preg_match_all('!\d+!', $input["number"], $matches);
+  if (!empty($matches[0])) {
+    $input["number"] = implode("", $matches[0]); 
+  }
+  drupal_array_set_nested_value($form_state["values"], $element["#parents"], $input);
 }
 
 /**

@@ -87,36 +87,18 @@
         margin-left: 10px
         text-align: right
 
-.field-type-commerce-customer-profile-reference
-  @extend fieldset
-  & > .field-label
-    @extend legend
-  & > .field-items
-    @extend .row
-  .field-type-entityreference
-    @extend .col-lg-4
-
-.entity-xtuple-xdshipto
-  & > .content
-    @extend .row
-    & > .field
-      @extend .col-lg-12
-      margin-bottom: 10px
-      &.field-type-xdruple-entityreference
-        @extend .col-lg-6
-
 .checkout-completion-message
   @extend .well
   p:last-child
     margin-bottom: 0
 
-#payment-details
-  .commerce-credit-card-expiration
-    input
-      display: inline-block
-      max-width: 45px
-      text-align: center
-  .form-item-commerce-payment-payment-details-credit-card-exp-year
-    float: right
+.commerce-payment-credit-card
+  .form-item-commerce-payment-payment-details-credit-card-type
     margin-top: 0
-    width: 90px
+    div.form-item
+      display: inline-block
+      margin-right: 1em
+  .commerce-payment-credit-card--data
+    .form-item
+      float: left
+      margin: 0 1em 0 0
