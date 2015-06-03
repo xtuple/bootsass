@@ -311,6 +311,13 @@ function bootcommerce_form_commerce_checkout_form_review_alter(&$form, &$form_st
   }
   $form['buttons']['back']['#attributes']['class']['btn-danger'] = 'btn-danger';
 
+  if (!empty($form["commerce_payment"]["payment_method"]["#options"])
+    && sizeof($form["commerce_payment"]["payment_method"]["#options"]) == 1
+  ) {
+    $payment_method = &$form["commerce_payment"]["payment_method"];
+    $payment_method["#type"] = "value";
+    $payment_method["#value"] = $payment_method["#default_value"];
+  }
   if (!empty($form["commerce_payment"]["payment_details"]["credit_card"])) {
     $credit_card = &$form["commerce_payment"]["payment_details"]["credit_card"];
     $credit_card["#theme"] = "bootcommerce_commerce_payment_credit_cart";
@@ -356,7 +363,7 @@ function bootcommerce_commerce_payment_credit_cart_validate($element, &$form_sta
   $input["exp_year"] = substr(date('Y'), 0, 2) . $input["exp_year"];
   preg_match_all('!\d+!', $input["number"], $matches);
   if (!empty($matches[0])) {
-    $input["number"] = implode("", $matches[0]); 
+    $input["number"] = implode("", $matches[0]);
   }
   drupal_array_set_nested_value($form_state["values"], $element["#parents"], $input);
 }
