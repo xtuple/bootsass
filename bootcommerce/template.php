@@ -23,10 +23,27 @@ function bootcommerce_preprocess_layout_header(&$variables) {
   $variables['cart_dropdown'] = theme('block_cart_dropdown', array(
     'name' => 'cart-dropdown',
   ));
-
-  $variables['order_defaults_form'] = theme('block_order_defaults_form', array(
-    'name' => 'order-defaults_form',
-  ));
+  global $user;
+  if (!empty($user->proxy)) {
+    /** @var \Xtuple\Drupal7\Proxy\User\CommerceUserProxy $proxy */
+    $proxy = $user->proxy;
+    if ($proxy->xdUserContactAccount()) {
+      if ($proxy->xdUserContactAccount()->xdUserContactAccount()) {
+        if ($proxy->xdUserContactAccount()->xdUserContactAccount()->userContactAccount()->isCustomer()
+          || $proxy->xdUserContactAccount()->xdUserContactAccount()->userContactAccount()->isSalesRep()
+        ) {
+          $variables['order_defaults_form'] = theme('block_order_defaults_form', array(
+            'name' => 'order-defaults_form',
+          ));
+        }
+      }
+    }
+    elseif ($proxy->uid() == 1) {
+      $variables['order_defaults_form'] = theme('block_order_defaults_form', array(
+        'name' => 'order-defaults_form',
+      ));
+    }
+  }
 }
 
 /**
