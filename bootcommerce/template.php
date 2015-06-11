@@ -27,10 +27,10 @@ function bootcommerce_preprocess_layout_header(&$variables) {
   if (!empty($user->proxy)) {
     /** @var \Xtuple\Drupal7\Proxy\User\CommerceUserProxy $proxy */
     $proxy = $user->proxy;
-    if ($proxy->xdUserContactAccount()) {
-      if ($proxy->xdUserContactAccount()->xdUserContactAccount()) {
-        if ($proxy->xdUserContactAccount()->xdUserContactAccount()->userContactAccount()->isCustomer()
-          || $proxy->xdUserContactAccount()->xdUserContactAccount()->userContactAccount()->isSalesRep()
+    if ($proxy->xdUserAssociation()) {
+      if ($proxy->xdUserAssociation()->xdUserAssociation()) {
+        if ($proxy->xdUserAssociation()->xdUserAssociation()->userAssociation()->isCustomer()
+          || $proxy->xdUserAssociation()->xdUserAssociation()->userAssociation()->isSalesRep()
         ) {
           $variables['order_defaults_form'] = theme('block_order_defaults_form', array(
             'name' => 'order-defaults_form',
