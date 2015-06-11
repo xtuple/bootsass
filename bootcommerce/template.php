@@ -401,3 +401,9 @@ function bootcommerce_form_commerce_checkout_form_shipping_alter(&$form, $form_s
   }
   $form['buttons']['back']['#attributes']['class']['btn-danger'] = 'btn-danger';
 }
+
+function bootcommerce_preprocess_xdruple_xd_user_association_default_formatter(&$variables) {
+  foreach ($variables["rows"] as &$row) {
+    $row["attributes_array"]["class"]["row"] = "row";
+  }
+}
