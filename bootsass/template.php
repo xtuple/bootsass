@@ -8,32 +8,32 @@
  * Implements hook_theme()
  */
 function bootsass_theme() {
-  $items = array();
+  $items = [];
 
-  $items['layout_header'] = array(
+  $items['layout_header'] = [
     'template' => 'templates/layout/layout-header',
-  );
-  $items['layout_body_top'] = array(
+  ];
+  $items['layout_body_top'] = [
     'template' => 'templates/layout/layout-body-top',
-  );
-  $items['layout_body_middle'] = array(
+  ];
+  $items['layout_body_middle'] = [
     'template' => 'templates/layout/layout-body-middle',
-  );
-  $items['layout_body_bottom'] = array(
+  ];
+  $items['layout_body_bottom'] = [
     'template' => 'templates/layout/layout-body-bottom',
-  );
-  $items['layout_content_top'] = array(
+  ];
+  $items['layout_content_top'] = [
     'template' => 'templates/layout/layout-content-top',
-  );
-  $items['layout_content_bottom'] = array(
+  ];
+  $items['layout_content_bottom'] = [
     'template' => 'templates/layout/layout-content-bottom',
-  );
-  $items['layout_content_context'] = array(
+  ];
+  $items['layout_content_context'] = [
     'template' => 'templates/layout/layout-content-context',
-  );
-  $items['layout_footer'] = array(
+  ];
+  $items['layout_footer'] = [
     'template' => 'templates/layout/layout-footer',
-  );
+  ];
 
   return $items;
 }
@@ -49,12 +49,12 @@ function bootsass_preprocess_page(&$variables) {
   $variables['header'] = theme('layout_header');
   $variables['body_top'] = theme('layout_body_top');
 
-  $variables['body_middle'] = theme('layout_body_middle', array(
+  $variables['body_middle'] = theme('layout_body_middle', [
     'content_middle' => $variables['page']['content'],
     'content_top' => theme('layout_content_top'),
     'content_bottom' => theme('layout_content_bottom'),
     'context' => theme('layout_content_context'),
-  ));
+  ]);
   $variables['body_bottom'] = theme('layout_body_bottom');
   $variables['footer'] = theme('layout_footer');
 }
@@ -109,7 +109,7 @@ function bootsass_preprocess_links(&$variables) {
   }
 
   if (!empty($variables['links'])) {
-    $links = array();
+    $links = [];
     foreach ($variables['links'] as $key => &$link) {
       if (!empty($link['attributes']['class'])) {
         if (in_array('active-trail', $link['attributes']['class'])) {
@@ -188,26 +188,26 @@ function bootsass_preprocess_views_view_field(&$variables) {
  * @param $variables
  */
 function bootsass_preprocess_layout_header(&$variables) {
-  $variables['site_phone_array'] = array(
+  $variables['site_phone_array'] = [
     '#theme' => 'block_block',
     '#name' => 'site-phone',
     '#title' => variable_get('header_site_phone_title', 'Call us:'),
     '#content' => variable_get('site_phone_value', "(800) 555-1234"),
-  );
+  ];
 
   $variables['logo'] = '<div class="b-logo">' . l('Logo', '<front>') . '</div>';
 
-  $variables['main_menu_array'] = array(
+  $variables['main_menu_array'] = [
     '#theme' => 'block_menu',
     '#name' => 'menu_main_menu',
     '#context' => 'header',
-  );
+  ];
 
-  $variables['user_menu_array'] = array(
+  $variables['user_menu_array'] = [
     '#theme' => 'block_menu',
     '#name' => 'user-menu',
     '#context' => 'header',
-  );
+  ];
 }
 
 /**
@@ -230,9 +230,9 @@ function bootsass_process_layout_header(&$variables) {
  */
 function bootsass_preprocess_layout_body_top(&$variables) {
   $variables['messages'] = theme('status_messages');
-  $variables['breadcrumb'] = theme('breadcrumb', array(
+  $variables['breadcrumb'] = theme('breadcrumb', [
     'breadcrumb' => drupal_get_breadcrumb(),
-  ));
+  ]);
 }
 
 /**
@@ -274,65 +274,65 @@ function bootsass_preprocess_layout_body_bottom(&$variables) {
  * @param $variables
  */
 function bootsass_preprocess_layout_footer(&$variables) {
-  $variables['main_menu_array'] = array(
+  $variables['main_menu_array'] = [
     '#theme' => 'block_menu',
     '#name' => 'menu_main_menu',
     '#title' => variable_get('footer_main_menu_title', 'Main menu'),
     '#title_tag' => 'h4',
-  );
+  ];
 
-  $variables['secondary_menu_array'] = array(
+  $variables['secondary_menu_array'] = [
     '#theme' => 'block_menu',
     '#name' => 'menu_secondary_menu',
     '#title' => variable_get('footer_secondary_menu_title', 'Secondary menu'),
     '#title_tag' => 'h4',
-  );
+  ];
 
-  $variables['user_menu_array'] = array(
+  $variables['user_menu_array'] = [
     '#theme' => 'block_menu',
     '#name' => 'user-menu',
     '#title' => variable_get('footer_user_menu_title', 'User menu'),
     '#title_tag' => 'h4',
-  );
+  ];
 
-  $variables['contact_info_array'] = array(
+  $variables['contact_info_array'] = [
     '#theme' => 'block_block',
     '#name' => 'contact-info',
     '#title' => variable_get('footer_contacts_title', 'Contact information'),
     '#title_tag' => 'h4',
-    '#content' => format_text_variable_get('footer_contacts_value', array(
+    '#content' => format_text_variable_get('footer_contacts_value', [
       'value' => 'Site built by xTuple.',
       'format' => 'htmlpurifier_basic',
-    )),
-  );
+    ]),
+  ];
 
-  $variables['site_phone_array'] = array(
+  $variables['site_phone_array'] = [
     '#theme' => 'block_block',
     '#name' => 'site-phone',
     '#title' => variable_get('footer_site_phone_title', 'Call us now toll free:'),
     '#title_tag' => 'h4',
     '#content' => variable_get('site_phone_value'),
-  );
+  ];
 
-  $variables['social_menu_array'] = array(
+  $variables['social_menu_array'] = [
     '#theme' => 'block_menu',
     '#name' => 'menu-social-menu',
     '#title' => variable_get('footer_social_menu_title', 'Social menu'),
     '#title_tag' => 'h4',
-  );
+  ];
 
-  $variables['copyright_array'] = array(
+  $variables['copyright_array'] = [
     '#theme' => 'block_block',
     '#name' => 'site-copyright',
     '#title_tag' => 'h4',
-    '#content' => format_text_variable_get('footer_message', array(
+    '#content' => format_text_variable_get('footer_message', [
       'value' => '<p>© ' . date('Y') . ', ' . variable_get('site_name') . '</p>',
       'format' => 'htmlpurifier_basic',
-    )),
-    '#attributes_array' => array(
-      'class' => array('well b-copyright'),
-    ),
-  );
+    ]),
+    '#attributes_array' => [
+      'class' => ['well b-copyright'],
+    ],
+  ];
 }
 
 /**
@@ -359,10 +359,10 @@ function bootsass_process_layout_footer(&$variables) {
  * @throws \Exception
  */
 function bootsass_preprocess_layout_content_top(&$variables) {
-  $variables['tabs'] = theme('menu_local_tasks', array(
+  $variables['tabs'] = theme('menu_local_tasks', [
     'primary' => menu_primary_local_tasks(),
     'secondary' => menu_secondary_local_tasks(),
-  ));
+  ]);
 
   $variables['title'] = drupal_get_title();
   $variables['help'] = menu_get_active_help();
@@ -383,7 +383,7 @@ function bootsass_preprocess_layout_content_bottom(&$variables) {
  * @param $variables
  */
 function bootsass_preprocess_layout_content_context(&$variables) {
-  $blocks = array();
+  $blocks = [];
 
   /** @var stdClass $user */
   global $user;
@@ -400,7 +400,7 @@ function bootsass_show_content_context() {
 }
 
 function bootsass_page_exclude_content_context() {
-  $exclude_context = array(
+  $exclude_context = [
     'cart',
     'checkout',
     'checkout/%commerce_order',
@@ -409,7 +409,7 @@ function bootsass_page_exclude_content_context() {
     'user/*/*',
     'bootstrap',
     'bootstrap/*',
-  );
+  ];
 
   drupal_alter('bootsass_page_exclude_content_context', $exclude_context);
 

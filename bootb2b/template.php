@@ -21,22 +21,22 @@ function bootb2b_status_messages(&$vars) {
   $output = '';
 
   // Keep these statuses, as they are used for assistive technologies
-  $status_heading = array(
+  $status_heading = [
     'status' => t('Status message'),
     'error' => t('Error message'),
     'warning' => t('Warning message'),
-  );
+  ];
 
   // Mapping of Drupal statuses to Bootstrap.
-  $bootstrap_types = array(
+  $bootstrap_types = [
     'status' => 'success',
     'error' => 'danger',
     'warning' => 'warning',
     'info' => 'info',
-  );
+  ];
 
   foreach (drupal_get_messages($display) as $type => $messages) {
-    $classes = array('alert');
+    $classes = ['alert'];
     if (isset($bootstrap_types[$type])) {
       $classes[] = "alert-$bootstrap_types[$type]";
     }
@@ -165,12 +165,12 @@ function bootb2b_xdruple_favorites_favorites_form_submit_ajax_commands_alter(&$c
  * Implements hook_form_FORM_ID_later for commerce_cart_add_to_cart_form
  */
 function bootb2b_form_commerce_cart_add_to_cart_form_alter(&$form, &$form_state) {
-  $form['quantity']['#attributes'] = array(
+  $form['quantity']['#attributes'] = [
     'tabindex' => 1,
-  );
+  ];
 
   global $user;
-  $products = array();
+  $products = [];
   if ($order = commerce_cart_order_load($user->uid)) {
     if (!empty($order->commerce_line_items[LANGUAGE_NONE])) {
       foreach ($order->commerce_line_items[LANGUAGE_NONE] as $item) {
@@ -190,22 +190,22 @@ function bootb2b_form_commerce_cart_add_to_cart_form_alter(&$form, &$form_state)
     $form['quantity']['#default_value'] = $form_state['values']['quantity'];
   }
 
-  $form['quantity']['#ajax'] = array(
+  $form['quantity']['#ajax'] = [
     'callback' => '_bootb2b_add_to_cart_form_ajax_handler',
     'event' => 'change',
     'effect' => 'fade',
-    'trigger_as' => array(
+    'trigger_as' => [
       'name' => 'op',
-    ),
-  );
-  $form['submit']['#ajax'] = array(
+    ],
+  ];
+  $form['submit']['#ajax'] = [
     'callback' => '_bootb2b_add_to_cart_form_ajax_handler',
-  );
-  $form['#validate'] = array('bootb2b_commerce_cart_add_to_cart_form_validate_override');
-  $form['#submit'] = array(
+  ];
+  $form['#validate'] = ['bootb2b_commerce_cart_add_to_cart_form_validate_override'];
+  $form['#submit'] = [
     'bootb2b_form_commerce_cart_add_to_cart_form_submit',
     'bootb2b_commerce_cart_add_to_cart_form_submit_override'
-  );
+  ];
 }
 
 /**
@@ -319,26 +319,26 @@ function bootb2b_commerce_cart_add_to_cart_form_submit_override($form, &$form_st
         );
 
         if ($form['quantity']['#default_value'] == 0) {
-          drupal_set_message(t('%title added to !cart.', array(
+          drupal_set_message(t('%title added to !cart.', [
             '%title' => $product->title,
             '!cart' => l('your cart', 'cart'),
-          )));
+          ]));
         }
         elseif ($form['quantity']['#default_value'] !== $form_state['values']['quantity']) {
-          drupal_set_message(t('%title quantity updated in !cart.', array(
+          drupal_set_message(t('%title quantity updated in !cart.', [
             '%title' => $product->title,
             '!cart' => l('your cart', 'cart'),
-          )));
+          ]));
         }
       }
       else {
-        drupal_set_message(t('%title could not be added to your cart.', array('%title' => $product->title)), 'error');
+        drupal_set_message(t('%title could not be added to your cart.', ['%title' => $product->title]), 'error');
       }
     }
   }
   else {
     if ($form['quantity']['#default_value'] > 0) {
-      drupal_set_message(t('%title removed from your cart.', array('%title' => $product->title)), 'warning');
+      drupal_set_message(t('%title removed from your cart.', ['%title' => $product->title]), 'warning');
     }
   }
 }
@@ -347,7 +347,7 @@ function bootb2b_commerce_cart_add_to_cart_form_submit_override($form, &$form_st
  * AJAX handler for commerce_cart_add_to_cart_form
  */
 function _bootb2b_add_to_cart_form_ajax_handler($form, $form_state) {
-  $commands = array();
+  $commands = [];
 
   // Replace the form with the new one
   $selector = "#{$form['#id']}";
@@ -365,7 +365,7 @@ function _bootb2b_add_to_cart_form_ajax_handler($form, $form_state) {
   if (user_access('access content')) {
     global $user;
     if ($order = commerce_cart_order_load($user->uid)) {
-      $cart = commerce_embed_view('ft_commerce_cart_block', 'default', array($order->order_id), 'cart');
+      $cart = commerce_embed_view('ft_commerce_cart_block', 'default', [$order->order_id], 'cart');
 
       $cart .= '<div class="links">';
       $cart .= '<div class="link">' . l('Checkout', 'checkout') . '</div>';
@@ -373,20 +373,20 @@ function _bootb2b_add_to_cart_form_ajax_handler($form, $form_state) {
       $cart .= '</div>';
 
       $commands[] = ajax_command_remove('.b-block-core-cart--content div.links');
-      $commands[] = ajax_command_replace('.b-block-core-cart--content .view-ft-commerce-cart-block, .b-block-core-cart--content .empty-cart', $cart, array(
+      $commands[] = ajax_command_replace('.b-block-core-cart--content .view-ft-commerce-cart-block, .b-block-core-cart--content .empty-cart', $cart, [
         'effect' => 'fade'
-      ));
+      ]);
 
-      $commands[] = ajax_command_replace('.b-block-cart-dropdown', theme('block_cart_dropdown', array(
+      $commands[] = ajax_command_replace('.b-block-cart-dropdown', theme('block_cart_dropdown', [
         'name' => 'cart-dropdown',
-      )), array(
+      ]), [
         'effect' => 'fade',
-      ));
+      ]);
     }
   }
 
-  return array(
+  return [
     '#type' => 'ajax',
     '#commands' => $commands,
-  );
+  ];
 }

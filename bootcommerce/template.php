@@ -16,13 +16,13 @@ function bootcommerce_theme() {
 }
 
 function bootcommerce_preprocess_layout_header(&$variables) {
-  $variables['search_box'] = theme('block_form', array(
+  $variables['search_box'] = theme('block_form', [
     'name' => 'xdruple_search_search_form',
-  ));
+  ]);
 
-  $variables['cart_dropdown'] = theme('block_cart_dropdown', array(
+  $variables['cart_dropdown'] = theme('block_cart_dropdown', [
     'name' => 'cart-dropdown',
-  ));
+  ]);
   /** @var \Xtuple\Drupal7\Proxy\User\CommerceUserProxy $user */
   global $user;
   if ($user->xdUserAssociation()) {
@@ -49,10 +49,10 @@ function bootcommerce_preprocess_layout_header(&$variables) {
 function bootcommerce_preprocess_layout_content_context(&$variables) {
   $blocks = &$variables['blocks'];
 
-  if (drupal_match_menu_path(array(
+  if (drupal_match_menu_path([
     'products',
     'products/*'
-  ))
+  ])
   ) {
     $panel = new \Xtuple\XdrupleQueries\Theme\CategoriesDropdown();
     $blocks['categories_dropdown'] = $panel->render(-10);
@@ -106,20 +106,20 @@ function bootcommerce_preprocess_field(&$variables) {
  * @see template_preprocess_entity()
  */
 function bootcommerce_preprocess_entity(&$variables) {
-  $variables['context_attributes_array'] = array();
-  $variables['bottom_attributes_array'] = array();
-  $variables['characteristics_attributes_array'] = array();
+  $variables['context_attributes_array'] = [];
+  $variables['bottom_attributes_array'] = [];
+  $variables['characteristics_attributes_array'] = [];
 
   if ($variables['view_mode'] == 'full'
     && $variables['entity_type'] == 'commerce_product'
   ) {
     $variables['classes_array']['row'] = 'row';
     $variables['content_attributes_array']['class']['col-lg'] = 'col-lg-8';
-    $variables['context_attributes_array'] = array(
-      'class' => array(
+    $variables['context_attributes_array'] = [
+      'class' => [
         'col-lg' => 'col-lg-4',
-      ),
-    );
+      ],
+    ];
 
     $variables['content']['inventoryUnit']['#access'] = TRUE;
     $variables['content']['priceUnit']['#access'] = FALSE;
@@ -150,13 +150,13 @@ function bootcommerce_preprocess_entity(&$variables) {
       $variables['content']['add_to_cart']['#weight'] = -10;
     }
 
-    $context_fields = array(
+    $context_fields = [
       'product_price',
       'add_to_cart',
       'xt_url_image_field',
       'xt_url_file_field',
       'xt_url_link_field',
-    );
+    ];
 
     if (module_exists('xdruple_favorites')) {
       if (($customer = xdruple_rescued_session_get('customer'))
@@ -183,9 +183,9 @@ function bootcommerce_preprocess_entity(&$variables) {
       unset($variables['content']['xt_chars']);
     }
 
-    $bottom_fields = array(
+    $bottom_fields = [
       'substitutes',
-    );
+    ];
     foreach ($bottom_fields as $field) {
       if (!empty($variables['content'][$field])) {
         $variables['bottom'][$field] = $variables['content'][$field];
@@ -232,16 +232,16 @@ function bootcommerce_file_link(&$variables) {
   $icon_directory = $variables['icon_directory'];
 
   $url = file_create_url($file->uri);
-  $icon = theme('file_icon', array('file' => $file, 'icon_directory' => $icon_directory));
+  $icon = theme('file_icon', ['file' => $file, 'icon_directory' => $icon_directory]);
 
   // Set options as per anchor format described at
   // http://microformats.org/wiki/file-format-examples
-  $options = array(
-    'attributes' => array(
+  $options = [
+    'attributes' => [
       'type' => $file->filemime . '; length=' . $file->filesize,
       'target' => '_blank',
-    ),
-  );
+    ],
+  ];
 
   // Use the description as the link text if available.
   if (empty($file->description)) {
@@ -287,7 +287,7 @@ function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_
   }
   $form['buttons']['cancel']['#attributes']['class']['btn-danger'] = 'btn-danger';
 
-  foreach (array("customer_profile_shipping", "customer_profile_billing") as $profile_type) {
+  foreach (["customer_profile_shipping", "customer_profile_billing"] as $profile_type) {
     if (!empty($form[$profile_type]["xd_contact"])) {
       /** @see preprocess_xdruple_contact_form_element */
       $xd_contact = &$form[$profile_type]["xd_contact"];
