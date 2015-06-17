@@ -341,11 +341,12 @@ function bootcommerce_form_commerce_checkout_form_review_alter(&$form, &$form_st
     unset($credit_card["#attached"]["css"]);
     $credit_card["type"]["#type"] = "radios";
     $credit_card["type"]["#title"] = "";
+    $credit_card["number"]["#size"] = 20;
     $credit_card["exp_month"]["#type"] = "textfield";
     $credit_card["exp_month"]["#title"] = t("Month");
     $credit_card["exp_month"]["#default_value"] = "";
     $credit_card["exp_month"]["#maxlength"] = 2;
-    $credit_card["exp_month"]["#size"] = 1;
+    $credit_card["exp_month"]["#size"] = 2;
     $credit_card["exp_month"]["#attributes"]["placeholder"] = "MM";
     unset($credit_card["exp_month"]["#prefix"]);
     unset($credit_card["exp_month"]["#suffix"]);
@@ -354,11 +355,10 @@ function bootcommerce_form_commerce_checkout_form_review_alter(&$form, &$form_st
     $credit_card["exp_year"]["#default_value"] = "";
     $credit_card["exp_year"]["#required"] = TRUE;
     $credit_card["exp_year"]["#maxlength"] = 2;
-    $credit_card["exp_year"]["#size"] = 1;
-    $credit_card["exp_year"]["#field_prefix"] = substr(date("Y"), 0, 2);
+    $credit_card["exp_year"]["#size"] = 2;
     $credit_card["exp_year"]["#attributes"]["placeholder"] = "YY";
     $credit_card["code"]["#title"] = "CVV/CSC";
-    $credit_card["code"]["#size"] = 1;
+    $credit_card["code"]["#size"] = 4;
     unset($credit_card["exp_year"]["#prefix"]);
     unset($credit_card["exp_year"]["#suffix"]);
     unset($credit_card["exp_year"]["#options"]);
