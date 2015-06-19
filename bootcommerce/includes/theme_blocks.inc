@@ -32,14 +32,17 @@ function bootcommerce_preprocess_block_bootcommerce_cart_block(&$variables) {
       /** @var \Xtuple\Drupal7\Proxy\User\UserProxyInterface $user */
       global $user;
       if ($order = commerce_cart_order_load($user->uid())) {
-        $content .= commerce_embed_view("ft_commerce_cart_block", "default", [$order->order_id]);
-        $content .= "<div class=\"links\">";
-        $content .= "<div class=\"link\">" . l("Checkout", "checkout") . "</div>";
-        $content .= "<div class=\"link\">" . l("Cart", "cart") . "</div>";
-        $content .= "</div>";
+        $result = views_get_view_result("ft_commerce_cart_block", "default", $order->order_id);
+        if (!empty($result)) {
+          $content .= commerce_embed_view("ft_commerce_cart_block", "default", [$order->order_id]);
+          $content .= "<div class=\"links\">";
+          $content .= "<div class=\"link\">" . l("Checkout", "checkout") . "</div>";
+          $content .= "<div class=\"link\">" . l("Cart", "cart") . "</div>";
+          $content .= "</div>";
+        }
       }
     }
-    if (empty($content)) {
+    if (empty($result)) {
       $content = "<div class=\"empty-cart\">" . t("Your cart is empty") . "</div>";
     }
     $variables["content"] = $content;
