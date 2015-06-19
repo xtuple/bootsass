@@ -15,7 +15,7 @@
         </thead>
         <tbody>
           <?php foreach ($products as $product): ?>
-            <tr><?php print $product ?></tr>
+            <tr><?php print drupal_render($product); ?></tr>
           <?php endforeach; ?>
         </tbody>
       </table>
