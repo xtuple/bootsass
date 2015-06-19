@@ -204,6 +204,7 @@ function bootb2b_form_commerce_cart_add_to_cart_form_alter(&$form, &$form_state)
       }
     }
   }
+  $form["quantity"]["#default_value"] = 0;
   if (!empty($products[$form["product_id"]["#value"]])) {
     $form["quantity"]["#default_value"] = $products[$form["product_id"]["#value"]];
   }
