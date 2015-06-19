@@ -12,10 +12,10 @@
         padding: 0
         margin: -1px
         .empty-cart
-          padding: 10px 15px
+          padding: $panel-heading-padding
         .links
           +clearfix
-          padding: 0 18px 12px
+          padding: $panel-heading-padding
           .link
             float: right
             margin-left: 10px
@@ -26,7 +26,7 @@
         padding: 0
         margin: -1px
         .empty-cart
-          padding: 10px 15px
+          padding: $panel-heading-padding
 
 #status-messages
   margin-left: - $grid-gutter-width / 2
@@ -96,34 +96,3 @@
     .field-content
       max-height: 20px
       overflow: hidden
-
-.view-ft-commerce-cart-block
-  .views-content
-    @extend .list-group
-  .views-row
-    @extend .list-group-item
-    +clearfix
-  .views-field-line-item-title
-    font-weight: $fw-bold
-  .views-field-quantity
-    float: right
-    margin-left: 5px
-    text-align: right
-    width: 40px
-  .views-field-commerce-total
-    float: right
-    font-size: $font-size-large
-    text-align: right
-    width: 90px
-  .views-field-edit-delete
-    float: left
-    margin-top: 2px
-    button.delete-line-item
-      @extend .btn-xs
-  .line-item-summary
-    padding: 12px 18px 0
-  .line-item-quantity,
-  .line-item-total
-    font-size: $font-size-large
-  .cart-empty-block
-    padding: 10px 15px

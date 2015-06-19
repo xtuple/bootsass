@@ -12,6 +12,11 @@ function bootcommerce_theme() {
     "template" => "bootcommerce-commerce-payment-credit-card",
     "path" => "$templates/commerce_payment",
   ];
+  $items += \CDD\OpenCDD\Theme\Block::themeDefinition("bootcommerce_cart_block", [
+    "hide_empty_title" => FALSE,
+    "hide_empty_content" => FALSE,
+    "hide_empty_block" => FALSE,
+  ]);
   return $items;
 }
 
