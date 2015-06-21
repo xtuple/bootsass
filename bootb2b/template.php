@@ -126,7 +126,7 @@ function bootb2b_preprocess_products_page_item(&$variables) {
     "#theme" => "xdruple_queries_price",
     "#product" => $product,
     "#unit_price" => TRUE,
-    "#unit" => $product->priceUnit,
+    "#show_unit" => TRUE,
     "#label" => "",
   ];
   if (($customer = xdruple_rescued_session_get("customer"))
