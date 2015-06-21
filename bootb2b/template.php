@@ -122,11 +122,13 @@ function bootb2b_preprocess_products_page_item(&$variables) {
   $product = $variables["product"];
   $variables["sku"] = $product->sku;
   $variables["pack"] = "{$product->productWeight} {$product->weightUnit}/{$product->inventoryUnit}";
-  $unit_price = _xdruple_queries_price($product, 1, 0, FALSE) / $product->uomRatio;
-  $unit_price = commerce_currency_format($unit_price, "USD");
-  $variables["unit_price"] = "{$unit_price}/{$product->priceUnit}";
-  $variables["price"] = "{$variables["price"]}/{$product->inventoryUnit}";
-
+  $variables["unit_price"] = [
+    "#theme" => "xdruple_queries_price",
+    "#product" => $product,
+    "#unit_price" => TRUE,
+    "#unit" => $product->priceUnit,
+    "#label" => "",
+  ];
   if (($customer = xdruple_rescued_session_get("customer"))
     && ($ship_to = xdruple_rescued_session_get("ship_to"))
   ) {

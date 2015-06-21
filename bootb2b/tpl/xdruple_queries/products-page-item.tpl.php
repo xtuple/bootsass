@@ -15,12 +15,12 @@
 </td>
 <td class="views-field views-field-unit-price">
   <?php if (!empty($unit_price)): ?>
-    <?php print $unit_price ?>
+    <?php print drupal_render($unit_price) ?>
   <?php endif; ?>
 </td>
 <td class="views-field views-field-price">
   <?php if (!empty($price)): ?>
-    <?php print $price ?>
+    <?php print drupal_render($price) ?>
   <?php endif; ?>
 </td>
 <td class="views-field views-field-add-to-cart-form">
