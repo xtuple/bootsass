@@ -136,21 +136,6 @@ function bootcommerce_preprocess_entity(&$variables) {
 
     $variables['characteristics_title'] = t('Characteristics');
 
-    if (!empty($variables['content']['product_price']['#weight'])) {
-      $variables['content']['product_price']['#prefix'] = '<div class="field field-product-price field-label-above">';
-      $variables['content']['product_price']['#suffix'] = '</div>';
-      $variables['content']['product_price']['#weight'] = -11;
-      $markup = '';
-      $markup .= '<div class="field-label">' . t('Price') . ':&nbsp;</div>';
-      $unit_key = $variables['content']['inventoryUnit']['#items'][0]['value'];
-      $units = xdruple_fields_get_uom_list();
-      $unit = $units[$unit_key];
-      $variables['unit'] = $unit;
-      $markup .= '<div class="field-item"><span>' . $variables['content']['product_price']['#markup'] .
-        '</span><small> / ' . $variables['unit'] . '</small>' . '</div>';
-      $variables['content']['product_price']['#markup'] = $markup;
-    }
-
     if (!empty($variables['content']['add_to_cart']['#weight'])) {
       $variables['content']['add_to_cart']['#weight'] = -10;
     }
@@ -407,5 +392,24 @@ function bootcommerce_form_commerce_checkout_form_shipping_alter(&$form, $form_s
 function bootcommerce_preprocess_xdruple_xd_user_association_default_formatter(&$variables) {
   foreach ($variables["rows"] as &$row) {
     $row["attributes_array"]["class"]["row"] = "row";
+  }
+}
+
+function bootcommerce_entity_view_alter(&$build, $type) {
+  if ($type == "commerce_product" && $build["#view_mode"] == "full") {
+    if (!empty($build['product_price'])) {
+      $build['product_price']['#prefix'] = '<div class="field field-product-price field-label-above">';
+      $build['product_price']['#suffix'] = '</div>';
+      $build['product_price']['#weight'] = -11;
+      $markup = '';
+      $markup .= '<div class="field-label">' . t('Price') . ':&nbsp;</div>';
+      $unit_key = $build['inventoryUnit']['#items'][0]['value'];
+      $units = xdruple_fields_get_uom_list();
+      $unit = $units[$unit_key];
+      $build['unit'] = $unit;
+      $markup .= '<div class="field-item"><span>' . $build['product_price']['#markup'] .
+        '</span><small> / ' . $build['unit'] . '</small>' . '</div>';
+      $build['product_price']['#markup'] = $markup;
+    }
   }
 }
