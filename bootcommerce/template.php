@@ -398,18 +398,7 @@ function bootcommerce_preprocess_xdruple_xd_user_association_default_formatter(&
 function bootcommerce_entity_view_alter(&$build, $type) {
   if ($type == "commerce_product" && $build["#view_mode"] == "full") {
     if (!empty($build['product_price'])) {
-      $build['product_price']['#prefix'] = '<div class="field field-product-price field-label-above">';
-      $build['product_price']['#suffix'] = '</div>';
       $build['product_price']['#weight'] = -11;
-      $markup = '';
-      $markup .= '<div class="field-label">' . t('Price') . ':&nbsp;</div>';
-      $unit_key = $build['inventoryUnit']['#items'][0]['value'];
-      $units = xdruple_fields_get_uom_list();
-      $unit = $units[$unit_key];
-      $build['unit'] = $unit;
-      $markup .= '<div class="field-item"><span>' . $build['product_price']['#markup'] .
-        '</span><small> / ' . $build['unit'] . '</small>' . '</div>';
-      $build['product_price']['#markup'] = $markup;
     }
   }
 }
