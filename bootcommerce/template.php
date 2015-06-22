@@ -109,6 +109,8 @@ function bootcommerce_preprocess_field(&$variables) {
 
 /**
  * @see template_preprocess_entity()
+ *
+ * @param $variables
  */
 function bootcommerce_preprocess_entity(&$variables) {
   $variables['context_attributes_array'] = [];
@@ -125,10 +127,6 @@ function bootcommerce_preprocess_entity(&$variables) {
         'col-lg' => 'col-lg-4',
       ],
     ];
-
-    $variables['content']['inventoryUnit']['#access'] = TRUE;
-    $variables['content']['priceUnit']['#access'] = FALSE;
-    $variables['content']['inventoryUnit']['#weight'] = $variables['content']['priceUnit']['#weight'];
 
     $variables['characteristics_attributes_array']['class']['xt-chars-wrapper'] = 'xt-chars-wrapper';
     $variables['characteristics_attributes_array']['class']['col-lg'] = 'col-lg-12';
