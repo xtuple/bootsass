@@ -88,7 +88,7 @@ function bootcommerce_preprocess_field(&$variables) {
     $variables['classes_array'][] = 'clearfix';
     foreach ($variables['items'] as $i => &$item) {
       if ($i == 0) {
-        $item['#settings']['preview'] = 'ft_commerce_product_page_thumb';
+        $item['#settings']['preview'] = 'commerce_product_thumbnail_style';
       }
       $item['#class'][] = 'img-thumbnail';
     }
