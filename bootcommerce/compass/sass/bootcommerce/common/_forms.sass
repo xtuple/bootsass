@@ -6,7 +6,7 @@ form
   div.messages.error
     @extend .alert-danger
 
-#views-form-ft-commerce-cart-form-default,
+.view-ft-commerce-cart-form,
 .view-ft-commerce-cart-summary
   .views-table
     tbody
@@ -73,3 +73,40 @@ form
     margin-bottom: 1em
     .form-item
       margin-top: 0
+
+.view-ft-commerce-cart-block
+  .views-content
+    @extend .list-group
+  .views-row
+    @extend .list-group-item
+  .views-table
+    margin-bottom: 0.5em
+  .views-row
+    +clearfix
+    .views-field-quantity
+      float: right
+    .views-field-commerce-total
+      float: right
+    .views-field-edit-delete
+      float: left
+  .views-field-line-item-title
+    font-weight: $fw-bold
+  .views-field-quantity
+    margin-left: 5px
+    text-align: right
+    width: 40px
+  .views-field-commerce-total
+    text-align: right
+    width: 90px
+  .views-field-edit-delete
+    margin-top: 2px
+    button.delete-line-item
+      @extend .btn-xs
+  .line-item-summary
+    padding: $panel-heading-padding
+    margin: 0
+  .line-item-quantity,
+  .line-item-total
+    font-size: $font-size-large
+  .cart-empty-block
+    padding: $panel-heading-padding
