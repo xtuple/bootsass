@@ -233,6 +233,7 @@ function bootcommerce_form_commerce_checkout_form_review_alter(&$form, &$form_st
     $credit_card["exp_month"]["#attributes"]["placeholder"] = "MM";
     unset($credit_card["exp_month"]["#prefix"]);
     unset($credit_card["exp_month"]["#suffix"]);
+    unset($credit_card["exp_month"]["#options"]);
     $credit_card["exp_year"]["#type"] = "textfield";
     $credit_card["exp_year"]["#title"] = t("Year");
     $credit_card["exp_year"]["#default_value"] = "";
@@ -257,7 +258,9 @@ function bootcommerce_form_commerce_checkout_form_review_alter(&$form, &$form_st
  */
 function bootcommerce_commerce_payment_credit_cart_validate($element, &$form_state, $form) {
   $input = drupal_array_get_nested_value($form_state["values"], $element["#parents"]);
-  $input["exp_year"] = substr(date('Y'), 0, 2) . $input["exp_year"];
+  if (!empty($input["exp_year"])) {
+    $input["exp_year"] = substr(date('Y'), 0, 2) . $input["exp_year"];
+  }
   preg_match_all('!\d+!', $input["number"], $matches);
   if (!empty($matches[0])) {
     $input["number"] = implode("", $matches[0]);
