@@ -27,24 +27,35 @@ function bootcommerce_preprocess_block_bootcommerce_cart_block(&$variables) {
         "panel-body",
       ],
     ];
-    $content = "";
     if (user_access("access content")) {
       /** @var \Xtuple\Drupal7\Proxy\User\UserProxyInterface $user */
       global $user;
       if ($order = commerce_cart_order_load($user->uid())) {
         $result = views_get_view_result("ft_commerce_cart_block", "default", $order->order_id);
         if (!empty($result)) {
-          $content .= commerce_embed_view("ft_commerce_cart_block", "default", [$order->order_id]);
-          $content .= "<div class=\"links\">";
-          $content .= "<div class=\"link\">" . l("Checkout", "checkout") . "</div>";
-          $content .= "<div class=\"link\">" . l("Cart", "cart") . "</div>";
-          $content .= "</div>";
+          $variables["view"] = commerce_embed_view("ft_commerce_cart_block", "default", [$order->order_id]);
+          $variables["links"] = [
+            "checkout" => l("Checkout", "checkout"),
+            "cart" => l("Cart", "cart"),
+          ];
         }
       }
     }
     if (empty($result)) {
-      $content = "<div class=\"empty-cart\">" . t("Your cart is empty") . "</div>";
+      $variables["view"] = "<div class=\"empty-cart\">" . t("Your cart is empty") . "</div>";
     }
-    $variables["content"] = $content;
+  }
+}
+
+function bootcommerce_process_block_bootcommerce_cart_block(&$variables) {
+  $variables["content"] = $variables["view"];
+  $links = [];
+  foreach ($variables["links"] as $link) {
+    $links[] = "<div class=\"link\">{$link}</div>";
+  }
+  if (!empty($links)) {
+    $variables["content"] .= strtr("<div class=\"links\">%links</div>", [
+      "%links" => implode("", $links),
+    ]);
   }
 }
