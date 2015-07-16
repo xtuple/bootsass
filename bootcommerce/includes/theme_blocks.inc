@@ -50,8 +50,10 @@ function bootcommerce_preprocess_block_bootcommerce_cart_block(&$variables) {
 function bootcommerce_process_block_bootcommerce_cart_block(&$variables) {
   $variables["content"] = $variables["view"];
   $links = [];
-  foreach ($variables["links"] as $link) {
-    $links[] = "<div class=\"link\">{$link}</div>";
+  if (!empty($variables["links"])) {
+    foreach ($variables["links"] as $link) {
+      $links[] = "<div class=\"link\">{$link}</div>";
+    }
   }
   if (!empty($links)) {
     $variables["content"] .= strtr("<div class=\"links\">%links</div>", [
