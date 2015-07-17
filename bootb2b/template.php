@@ -229,7 +229,7 @@ function bootb2b_form_commerce_cart_add_to_cart_form_alter(&$form, &$form_state)
   $form["#validate"] = ["bootb2b_commerce_cart_add_to_cart_form_validate_override"];
   $form["#submit"] = [
     "bootb2b_form_commerce_cart_add_to_cart_form_submit",
-    "bootb2b_commerce_cart_add_to_cart_form_submit_override"
+    "bootb2b_commerce_cart_add_to_cart_form_submit_override",
   ];
 }
 
@@ -352,6 +352,7 @@ function bootb2b_commerce_cart_add_to_cart_form_submit_override($form, &$form_st
           isset($line_item->data["context"]["add_to_cart_combine"]) ? $line_item->data["context"]["add_to_cart_combine"] : TRUE
         );
 
+        xdruple_remove_message("/added to/");
         if ($form["quantity"]["#default_value"] == 0) {
           drupal_set_message(t("%title added to !cart.", [
             "%title" => $product->title,
@@ -406,18 +407,12 @@ function _bootb2b_add_to_cart_form_ajax_handler($form, $form_state) {
     /** @var \Xtuple\Drupal7\Proxy\User\UserProxyInterface $user */
     global $user;
     if ($order = commerce_cart_order_load($user->uid())) {
-      $cart = commerce_embed_view("ft_commerce_cart_block", "default", [$order->order_id], "cart");
-
-      $cart .= "<div class=\"links\">";
-      $cart .= "<div class=\"link\">" . l("Checkout", "checkout") . "</div>";
-      $cart .= "<div class=\"link\">" . l("Cart", "cart") . "</div>";
-      $cart .= "</div>";
-
-      $commands[] = ajax_command_remove(".b-block-core-cart--content div.links");
-      $commands[] = ajax_command_replace(".b-block-core-cart--content .view-ft-commerce-cart-block, .b-block-core-cart--content .empty-cart", $cart, [
-        "effect" => "fade"
+      $commands[] = ajax_command_replace(".b-block-core-cart", theme("block_bootcommerce_cart_block", [
+        "name" => "core_cart",
+        "title" => t("My cart"),
+      ]), [
+        "effect" => "fade",
       ]);
-
       $commands[] = ajax_command_replace(".b-block-cart-dropdown", theme("block_cart_dropdown", [
         "name" => "cart-dropdown",
       ]), [
