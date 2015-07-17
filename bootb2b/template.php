@@ -352,6 +352,7 @@ function bootb2b_commerce_cart_add_to_cart_form_submit_override($form, &$form_st
           isset($line_item->data["context"]["add_to_cart_combine"]) ? $line_item->data["context"]["add_to_cart_combine"] : TRUE
         );
 
+        xdruple_remove_message("/added to/");
         if ($form["quantity"]["#default_value"] == 0) {
           drupal_set_message(t("%title added to !cart.", [
             "%title" => $product->title,
