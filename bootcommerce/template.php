@@ -21,13 +21,16 @@ function bootcommerce_theme() {
 }
 
 function bootcommerce_preprocess_layout_header(&$variables) {
-  $variables['search_box'] = theme('block_form', [
-    'name' => 'xdruple_search_search_form',
-  ]);
-
-  $variables['cart_dropdown'] = theme('block_cart_dropdown', [
-    'name' => 'cart-dropdown',
-  ]);
+  if (user_access("view any commerce_product entity")) {
+    $variables['search_box'] = theme('block_form', [
+      'name' => 'xdruple_search_search_form',
+    ]);
+  }
+  if (user_access("view any commerce_product entity")) {
+    $variables['cart_dropdown'] = theme('block_cart_dropdown', [
+      'name' => 'cart-dropdown',
+    ]);
+  }
   /** @var \Xtuple\Drupal7\Proxy\User\CommerceUserProxy $user */
   global $user;
   if ($user->xdUserAssociation()) {
