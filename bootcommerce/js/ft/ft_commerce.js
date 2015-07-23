@@ -3,7 +3,7 @@
     var view$ = $('.view-ft-commerce-xd-products');
     view$.find('.views-columns').each(function () {
       var parent$ = $(this);
-      equalHeights(parent$, '.views-field-subTitle');
+      equalHeights(parent$, '.xdruple-product-subtitle');
       equalHeights(parent$, '.views-field-title');
     });
   });

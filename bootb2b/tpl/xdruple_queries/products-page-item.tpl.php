@@ -23,7 +23,7 @@
     <?php print $price ?>
   <?php endif; ?>
 </td>
-<td class="views-field views-field-add-to-cart-form">
+<td class="xdruple-products-page-item-add-to-cart">
   <?php if (!empty($add_to_cart)): ?>
     <?php print $add_to_cart ?>
   <?php endif; ?>
