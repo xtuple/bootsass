@@ -59,7 +59,7 @@ function bootcommerce_preprocess_layout_content_context(&$variables) {
 
   if (drupal_match_menu_path([
     'products',
-    'products/*'
+    'products/*',
   ])
   ) {
     $panel = new \Xtuple\XdrupleQueries\Theme\CategoriesDropdown();
@@ -158,34 +158,28 @@ function bootcommerce_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter() for commerce_checkout_form_checkout
- *
  * @param $form
  * @param $form_state
  */
-function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_state) {
-  if (!empty($form['buttons']['cancel']['#attributes']['class'])) {
-    foreach ($form['buttons']['cancel']['#attributes']['class'] as $i => $value) {
-      if ($value == 'checkout-cancel') {
-        unset($form['buttons']['cancel']['#attributes']['class'][$i]);
-      }
-    }
-  }
-  $form['buttons']['cancel']['#attributes']['class']['btn-danger'] = 'btn-danger';
-
-  foreach (["customer_profile_shipping", "customer_profile_billing"] as $profile_type) {
-    if (!empty($form[$profile_type]["xd_contact"])) {
-      /** @see preprocess_xdruple_contact_form_element */
-      $xd_contact = &$form[$profile_type]["xd_contact"];
-      $xd_contact["#attributes"]["class"]["row"] = "row";
-      $language = LANGUAGE_NONE;
-      if (!empty($xd_contact["#language"])) {
-        $language = $xd_contact["#language"];
-      }
-      if (!empty($xd_contact[$language])) {
-        foreach (element_children($xd_contact[$language]) as $delta) {
-          $xd_contact[$language][$delta]["value"]["#variables"]["contact_attributes_array"]["class"]["col-lg-6"] = "col-lg-6";
-          $xd_contact[$language][$delta]["value"]["#variables"]["address_attributes_array"]["class"]["col-lg-6"] = "col-lg-6";
+function bootcommerce_form_commerce_checkout_form_alter(&$form, &$form_state) {
+  foreach ($form["buttons"] as $key => &$button) {
+    if (is_array($button)
+      && !empty($button["#type"])
+      && $button["#type"] == "submit"
+    ) {
+      if (!empty($button["#attributes"]["class"])) {
+        // Remove Commerce assigned classes to avoid theming conflicts
+        $class_key = array_search("checkout-{$key}", $button["#attributes"]["class"]);
+        if ($class_key !== FALSE) {
+          unset($button["#attributes"]["class"][$class_key]);
+        }
+        if (in_array($key, ["cancel", "back"])) {
+          // Assign btn-danger for cancel and back buttons
+          $class_key = array_search("btn-primary", $button["#attributes"]["class"]);
+          if ($class_key !== FALSE) {
+            unset($button["#attributes"]["class"][$class_key]);
+          }
+          $button["#attributes"]["class"]["btn-danger"] = "btn-danger";
         }
       }
     }
@@ -201,15 +195,6 @@ function bootcommerce_form_commerce_checkout_form_checkout_alter(&$form, &$form_
 function bootcommerce_form_commerce_checkout_form_review_alter(&$form, &$form_state) {
   $form['help']['#prefix'] = '<div class="checkout-help-wrapper well well-sm">';
   $form['help']['#suffix'] = '</div>';
-
-  if (!empty($form['buttons']['back']['#attributes']['class'])) {
-    foreach ($form['buttons']['back']['#attributes']['class'] as $i => $value) {
-      if ($value == 'checkout-back') {
-        unset($form['buttons']['back']['#attributes']['class'][$i]);
-      }
-    }
-  }
-  $form['buttons']['back']['#attributes']['class']['btn-danger'] = 'btn-danger';
 
   if (!empty($form["commerce_payment"]["payment_method"]["#options"])
     && sizeof($form["commerce_payment"]["payment_method"]["#options"]) == 1
@@ -269,23 +254,6 @@ function bootcommerce_commerce_payment_credit_cart_validate($element, &$form_sta
     $input["number"] = implode("", $matches[0]);
   }
   drupal_array_set_nested_value($form_state["values"], $element["#parents"], $input);
-}
-
-/**
- * Implements hook_form_FORM_ID_alter() for commerce_checkout_form_shipping
- *
- * @param $form
- * @param $form_state
- */
-function bootcommerce_form_commerce_checkout_form_shipping_alter(&$form, $form_state) {
-  if (!empty($form['buttons']['back']['#attributes']['class'])) {
-    foreach ($form['buttons']['back']['#attributes']['class'] as $i => $value) {
-      if ($value == 'checkout-back') {
-        unset($form['buttons']['back']['#attributes']['class'][$i]);
-      }
-    }
-  }
-  $form['buttons']['back']['#attributes']['class']['btn-danger'] = 'btn-danger';
 }
 
 function bootcommerce_preprocess_xdruple_xd_user_association_default_formatter(&$variables) {
