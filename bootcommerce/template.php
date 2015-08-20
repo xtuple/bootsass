@@ -162,24 +162,26 @@ function bootcommerce_form_alter(&$form, &$form_state, $form_id) {
  * @param $form_state
  */
 function bootcommerce_form_commerce_checkout_form_alter(&$form, &$form_state) {
-  foreach ($form["buttons"] as $key => &$button) {
-    if (is_array($button)
-      && !empty($button["#type"])
-      && $button["#type"] == "submit"
-    ) {
-      if (!empty($button["#attributes"]["class"])) {
-        // Remove Commerce assigned classes to avoid theming conflicts
-        $class_key = array_search("checkout-{$key}", $button["#attributes"]["class"]);
-        if ($class_key !== FALSE) {
-          unset($button["#attributes"]["class"][$class_key]);
-        }
-        if (in_array($key, ["cancel", "back"])) {
-          // Assign btn-danger for cancel and back buttons
-          $class_key = array_search("btn-primary", $button["#attributes"]["class"]);
+  if (!empty($form["buttons"])) {
+    foreach ($form["buttons"] as $key => &$button) {
+      if (is_array($button)
+        && !empty($button["#type"])
+        && $button["#type"] == "submit"
+      ) {
+        if (!empty($button["#attributes"]["class"])) {
+          // Remove Commerce assigned classes to avoid theming conflicts
+          $class_key = array_search("checkout-{$key}", $button["#attributes"]["class"]);
           if ($class_key !== FALSE) {
             unset($button["#attributes"]["class"][$class_key]);
           }
-          $button["#attributes"]["class"]["btn-danger"] = "btn-danger";
+          if (in_array($key, ["cancel", "back"])) {
+            // Assign btn-danger for cancel and back buttons
+            $class_key = array_search("btn-primary", $button["#attributes"]["class"]);
+            if ($class_key !== FALSE) {
+              unset($button["#attributes"]["class"][$class_key]);
+            }
+            $button["#attributes"]["class"]["btn-danger"] = "btn-danger";
+          }
         }
       }
     }
