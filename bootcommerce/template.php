@@ -183,6 +183,7 @@ function bootcommerce_form_commerce_checkout_form_alter(&$form, &$form_state) {
             $button["#attributes"]["class"]["btn-danger"] = "btn-danger";
           }
         }
+        $button["#attributes"]["data-loading-text"] = "Processing…";
       }
     }
   }
