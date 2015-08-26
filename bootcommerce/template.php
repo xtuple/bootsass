@@ -33,18 +33,7 @@ function bootcommerce_preprocess_layout_header(&$variables) {
   }
   /** @var \Xtuple\Drupal7\Proxy\User\CommerceUserProxy $user */
   global $user;
-  if ($user->xdUserAssociation()) {
-    if ($user->xdUserAssociation()->xdUserAssociation()) {
-      if ($user->xdUserAssociation()->xdUserAssociation()->userAssociation()->isCustomer()
-        || $user->xdUserAssociation()->xdUserAssociation()->userAssociation()->isSalesRep()
-      ) {
-        $variables['order_defaults_form'] = theme('block_order_defaults_form', [
-          'name' => 'order-defaults_form',
-        ]);
-      }
-    }
-  }
-  elseif ($user->uid() == 1) {
+  if (xdruple_fields_user_preferences_access($user)) {
     $variables['order_defaults_form'] = theme('block_order_defaults_form', [
       'name' => 'order-defaults_form',
     ]);
