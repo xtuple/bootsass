@@ -51,8 +51,9 @@ function bootcommerce_preprocess_layout_content_context(&$variables) {
     'products/*',
   ])
   ) {
-    $panel = new \Xtuple\XdrupleQueries\Theme\CategoriesDropdown();
-    $blocks['categories_dropdown'] = $panel->render(-10);
+    $blocks["categories"] = [
+      "#theme" => "xdruple_categories_dropdown",
+    ];
   }
 }
 
