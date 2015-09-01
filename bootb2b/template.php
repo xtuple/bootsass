@@ -101,43 +101,43 @@ function bootb2b_preprocess_block_menu(&$variables) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter() for xdruple_favorites_add_to_favorites_form
+ * Implements hook_form_FORM_ID_alter() for xdruple_add_to_favorites_form
  *
- * @see xdruple_favorites_add_to_favorites_form()
+ * @see xdruple_add_to_favorites_form()
  *
  * @param $form
  * @param $form_state
  */
-function bootb2b_form_xdruple_favorites_add_to_favorites_form_alter(&$form, &$form_state) {
+function bootb2b_form_xdruple_add_to_favorites_form_alter(&$form, &$form_state) {
   $form["submit"]["#value"] = "<i class=\"glyphicon glyphicon-star-empty\"></i>";
   $form["submit"]["#attributes"]["class"]["btn-add-favorites"] = "btn-add-favorites";
 }
 
 /**
- * Implements hook_form_FORM_ID_alter() for xdruple_favorites_remove_from_favorites
+ * Implements hook_form_FORM_ID_alter() for xdruple_remove_from_favorites
  *
- * @see xdruple_favorites_remove_from_favorites_form()
+ * @see xdruple_remove_from_favorites_form()
  *
  * @param $form
  * @param $form_state
  */
-function bootb2b_form_xdruple_favorites_remove_from_favorites_form_alter(&$form, &$form_state) {
+function bootb2b_form_xdruple_remove_from_favorites_form_alter(&$form, &$form_state) {
   $form["submit"]["#value"] = "<i class=\"glyphicon glyphicon-star\"></i>";
   $form["submit"]["#attributes"]["class"]["btn-remove-favorites"] = "btn-remove-favorites";
 }
 
 
 /**
- * Implements hook_xdruple_favorites_favorites_form_submit_ajax_commands_alter()
+ * Implements hook_xdruple_favorites_form_submit_ajax_commands_alter()
  *
- * @see xdruple_favorites_favorites_form_submit_ajax_commands()
+ * @see xdruple_form_submit_ajax_commands()
  *
  * @param $commands
  * @param $form
  * @param $form_state
  * @param $new_form
  */
-function bootb2b_xdruple_favorites_favorites_form_submit_ajax_commands_alter(&$commands, $form, $form_state, $new_form) {
+function bootb2b_xdruple_favorites_form_submit_ajax_commands_alter(&$commands, $form, $form_state, $new_form) {
   if ($form["#page_url"] == "products/favorites") {
     if (!empty($commands["replace"])) {
       $commands["remove"] = ajax_command_remove("tr:has(#{$new_form["#id"]})");
