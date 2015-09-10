@@ -31,9 +31,7 @@ function bootcommerce_preprocess_layout_header(&$variables) {
       'name' => 'cart-dropdown',
     ]);
   }
-  /** @var \Xtuple\Drupal7\Proxy\User\CommerceUserProxy $user */
-  global $user;
-  if (xdruple_fields_user_preferences_access($user)) {
+  if (user_access("access order defaults form")) {
     $variables['order_defaults_form'] = theme('block_order_defaults_form', [
       'name' => 'order-defaults_form',
     ]);
