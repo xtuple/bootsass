@@ -68,24 +68,8 @@ function bootcommerce_preprocess_field(&$variables) {
     $variables['row_by'] = 3;
   }
 
-  if ($variables['element']['#field_name'] == 'xt_url_image_field') {
-    $variables['classes_array'][] = 'clearfix';
-    foreach ($variables['items'] as $i => &$item) {
-      if ($i == 0) {
-        $item['#settings']['preview'] = 'commerce_product_thumbnail_style';
-      }
-      $item['#class'][] = 'img-thumbnail';
-    }
-  }
-
   if ($variables['element']['#bundle'] == 'shipping'
     || $variables['element']['#bundle'] == 'billing'
-  ) {
-    $variables['classes_array']['col-lg-4'] = 'col-lg-4';
-  }
-
-  if ($variables['element']['#bundle'] == 'xtuple_xdshipto'
-    && $variables['element']['#field_type'] == 'entityreference'
   ) {
     $variables['classes_array']['col-lg-4'] = 'col-lg-4';
   }
