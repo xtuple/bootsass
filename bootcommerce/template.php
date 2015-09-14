@@ -56,13 +56,6 @@ function bootcommerce_preprocess_layout_content_context(&$variables) {
 }
 
 /**
- * @see template_preprocess_xdruple_commerce_similar_product_link_default()
- */
-function bootcommerce_preprocess_xdruple_commerce_similar_product_link_default(&$variables) {
-  $variables['thumbnail_attributes_array']['class'][] = 'thumbnail';
-}
-
-/**
  * @see template_preprocess_field()
  */
 function bootcommerce_preprocess_field(&$variables) {
