@@ -40,7 +40,9 @@ function bootcommerce_preprocess_layout_header(&$variables) {
  * @param $variables
  */
 function bootcommerce_process_layout_header(&$variables) {
-  $variables["search_box"] = drupal_render($variables["search_box"]);
+  if (!empty($variables["search_box"])) {
+    $variables["search_box"] = drupal_render($variables["search_box"]);
+  }
 }
 
 /**
