@@ -21,10 +21,8 @@ function bootcommerce_theme() {
 }
 
 function bootcommerce_preprocess_layout_header(&$variables) {
-  if (user_access("view any commerce_product entity")) {
-    $variables['search_box'] = theme('block_form', [
-      'name' => 'xdruple_search_search_form',
-    ]);
+  if (user_access("view products")) {
+    $variables["search_box"] = drupal_get_form("xdruple_commerce_product_search_form");
   }
   if (user_access("view any commerce_product entity")) {
     $variables['cart_dropdown'] = theme('block_cart_dropdown', [
@@ -36,6 +34,13 @@ function bootcommerce_preprocess_layout_header(&$variables) {
       'name' => 'order-defaults_form',
     ]);
   }
+}
+
+/**
+ * @param $variables
+ */
+function bootcommerce_process_layout_header(&$variables) {
+  $variables["search_box"] = drupal_render($variables["search_box"]);
 }
 
 /**
