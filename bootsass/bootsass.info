@@ -19,5 +19,8 @@ compass[process][] = bootsass.sass
 compass[params][] = bootsass/_params
 
 compass[theme][stylesheets][all][] = bootsass.css
+compass[theme][stylesheets][print][] = bootsass.print.css
+;compass[theme][stylesheets-conditional][IE][all][] = bootsass.ie.css
+
 compass[theme][bootstrap3][css] = false
 compass[theme][bootstrap3][js] = true
