@@ -1,0 +1,26 @@
+name = BootSASS
+description = BootSASS theme for Bootstrap 3 based sites.
+core = 7.x
+engine = phptemplate
+
+; Compass module parameters
+compass[config][css_dir] = css
+compass[config][sass_dir] = sass
+compass[config][images_dir] = img
+compass[config][javascripts_dir] = js
+compass[config][fonts_dir] = fonts
+
+compass[config][output_style] = expanded
+compass[config][relative_assets] = true
+compass[config][line_comments] = false
+compass[config][preferred_syntax] = sass
+
+compass[process][] = bootsass.sass
+compass[params][] = bootsass/_params
+
+compass[theme][stylesheets][all][] = bootsass.css
+compass[theme][stylesheets][print][] = bootsass.print.css
+;compass[theme][stylesheets-conditional][IE][all][] = bootsass.ie.css
+
+compass[theme][bootstrap3][css] = false
+compass[theme][bootstrap3][js] = true
