@@ -36,10 +36,10 @@ function bootsass_theme() {
   ];
   $items["bootsass_commerce_payment_credit_cart"] = [
     "render element" => "element",
-    "template" => "bootcommerce-commerce-payment-credit-card",
+    "template" => "bootsass-commerce-payment-credit-card",
     "path" => "$templates/commerce_payment",
   ];
-  $items += \CDD\OpenCDD\Theme\Block::themeDefinition("bootcommerce_cart_block", [
+  $items += \CDD\OpenCDD\Theme\Block::themeDefinition("bootsass_cart_block", [
     "hide_empty_title" => FALSE,
     "hide_empty_content" => FALSE,
     "hide_empty_block" => FALSE,
@@ -593,7 +593,7 @@ function bootsass_form_commerce_checkout_form_review_alter(&$form, &$form_state)
 }
 
 /**
- * Helper function for bootcommerce_form_commerce_checkout_form_review_alter()
+ * Helper function for bootsass_form_commerce_checkout_form_review_alter()
  *
  * @param $element
  * @param $form_state

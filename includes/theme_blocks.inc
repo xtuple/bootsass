@@ -1,6 +1,6 @@
 <?php
 
-function bootsass_preprocess_block_bootcommerce_cart_block(&$variables) {
+function bootsass_preprocess_block_bootsass_cart_block(&$variables) {
   if (!empty($variables["name"])) {
     $base_class = "b-block";
     $instance_class = drupal_clean_css_identifier($base_class . "-" . $variables["name"]);
@@ -47,7 +47,7 @@ function bootsass_preprocess_block_bootcommerce_cart_block(&$variables) {
   }
 }
 
-function bootsass_process_block_bootcommerce_cart_block(&$variables) {
+function bootsass_process_block_bootsass_cart_block(&$variables) {
   $variables["content"] = $variables["view"];
   $links = [];
   if (!empty($variables["links"])) {
