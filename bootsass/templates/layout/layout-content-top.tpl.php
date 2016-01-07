@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var string $title
+ */
+?>
 <div id="content-top-wrap" class="hidden-print">
   <?php if (!empty($title)): ?>
     <div class="page-header">
