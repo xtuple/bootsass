@@ -374,7 +374,6 @@ function bootsass_preprocess_layout_content_top(&$variables) {
  * @param $variables
  */
 function bootsass_preprocess_layout_content_bottom(&$variables) {
-
 }
 
 /**

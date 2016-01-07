@@ -126,7 +126,6 @@ function bootb2b_form_xdruple_remove_from_favorites_form_alter(&$form, &$form_st
   $form["submit"]["#attributes"]["class"]["btn-remove-favorites"] = "btn-remove-favorites";
 }
 
-
 /**
  * Implements hook_xdruple_favorites_form_submit_ajax_commands_alter()
  *
