@@ -9,5 +9,8 @@
       "email": "a.mikheychik@gmail.com",
       "role": "Developer"
     }
-  ]
+  ],
+  "require": {
+    "cdd/drupal-installer-plugin": "dev-master"
+  }
 }
